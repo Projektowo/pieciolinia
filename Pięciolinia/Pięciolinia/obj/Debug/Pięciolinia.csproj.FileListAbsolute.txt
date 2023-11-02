@@ -1,0 +1,15 @@
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\bin\Debug\Pięciolinia.exe.config
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\bin\Debug\Pięciolinia.exe
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\bin\Debug\Pięciolinia.pdb
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.csproj.AssemblyReference.cache
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\MainWindow.g.cs
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\App.g.cs
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia_MarkupCompile.cache
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia_MarkupCompile.lref
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\MainWindow.baml
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.g.resources
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.Properties.Resources.resources
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.csproj.GenerateResource.cache
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.csproj.CoreCompileInputs.cache
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.exe
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.pdb
