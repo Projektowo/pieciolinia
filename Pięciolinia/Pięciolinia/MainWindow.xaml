@@ -31,7 +31,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
 
@@ -70,24 +71,28 @@
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="0"
+                    Grid.RowSpan="2"
                     Fill="red"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="1"
+                    Grid.RowSpan="2"
                     Fill="Blue"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="2"
-                      Fill="Green"
+                    Grid.RowSpan="2"   
+                    Fill="Green"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="3"
+                    Grid.RowSpan="2"
                     Fill="Yellow"
                     Height="50"/>
 
@@ -96,24 +101,28 @@
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="4"
+                    Grid.RowSpan="2"
                     Fill="red"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="5"
+                    Grid.RowSpan="2"
                     Fill="Blue"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="6"
+                    Grid.RowSpan="2"
                     Fill="Green"
                     Height="50"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="7"
+                    Grid.RowSpan="2"
                     Fill="Yellow"
                     Height="50"
 />
@@ -122,13 +131,25 @@
                 Grid.Column="8"
                 FontSize="26"
                 FontWeight="Bold"
-                Margin="15">Zapisz</Button>
+                Margin="3" Click="Button_Click">Zapisz</Button>
 
             <Button Grid.Row="2" 
                 Grid.Column="9"
                 FontSize="26"
                 FontWeight="Bold"
-                Margin="15">Exportuj</Button>
+                Margin="3">Exportuj</Button>
+
+            <Button Grid.Row="3" 
+                Grid.Column="8"
+                FontSize="26"
+                FontWeight="Bold"
+                Margin="3" Click="Button_Click">Wczytaj</Button>
+
+            <Button Grid.Row="3" 
+                Grid.Column="9"
+                FontSize="26"
+                FontWeight="Bold"
+                Margin="3">Wyczyść</Button>
 
 
         </Grid>
