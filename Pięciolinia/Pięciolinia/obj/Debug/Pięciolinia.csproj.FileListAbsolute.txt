@@ -15,3 +15,4 @@ D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.pdb
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Theme\TextBoxTheme.baml
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\App.baml
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Theme\ButtonTheme.baml

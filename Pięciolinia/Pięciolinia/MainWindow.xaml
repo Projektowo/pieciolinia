@@ -11,7 +11,7 @@
         AllowsTransparency="True">
 
     <Border Background="#272537"
-            CornerRadius="20">
+            Padding="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -43,7 +43,7 @@
                        HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="26"
-                       Margin="8,0,0,0"/>
+                       Margin="25,0,0,0"/>
 
             <TextBox Grid.Row="0"
                      Grid.ColumnSpan="4"
@@ -56,45 +56,47 @@
 
             <Button Grid.Row="0" 
                     Grid.Column="8"
-                    FontSize="26"
-                    FontWeight="Bold"
-                    Margin="10">Play</Button>
+                    Content="PLAY"
+                    Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="0" 
                     Grid.Column="9"
-                    FontSize="26"
-                    FontWeight="Bold"
-                    Margin="10">Stop</Button>
+                    Content="STOP"
+                    Style="{StaticResource ButtonTheme}"/>
 
-            
-            
+
+
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.RowSpan="2"
                     Fill="red"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.RowSpan="2"
                     Fill="Blue"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="2"
                     Grid.RowSpan="2"   
                     Fill="Green"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="3"
                     Grid.RowSpan="2"
                     Fill="Yellow"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             
             
@@ -103,21 +105,24 @@
                     Grid.Column="4"
                     Grid.RowSpan="2"
                     Fill="red"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="5"
                     Grid.RowSpan="2"
                     Fill="Blue"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
                     Grid.Column="6"
                     Grid.RowSpan="2"
                     Fill="Green"
-                    Height="50"/>
+                    Height="50"
+                    Margin="5"/>
 
             <Rectangle
                     Grid.Row="2"
@@ -125,31 +130,28 @@
                     Grid.RowSpan="2"
                     Fill="Yellow"
                     Height="50"
-/>
+                    Margin="5"/>
 
             <Button Grid.Row="2" 
-                Grid.Column="8"
-                FontSize="26"
-                FontWeight="Bold"
-                Margin="3">Zapisz</Button>
+                    Grid.Column="8"
+                    Content="Zapisz"
+                    Style="{StaticResource ButtonTheme}"/>
+
 
             <Button Grid.Row="2" 
-                Grid.Column="9"
-                FontSize="26"
-                FontWeight="Bold"
-                Margin="3">Exportuj</Button>
+                    Grid.Column="9"
+                    Content="Eksportuj"
+                    Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="3" 
-                Grid.Column="8"
-                FontSize="26"
-                FontWeight="Bold"
-                Margin="3">Wczytaj</Button>
+                    Grid.Column="8"
+                    Content="Wczytaj"
+                    Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="3" 
-                Grid.Column="9"
-                FontSize="26"
-                FontWeight="Bold"
-                Margin="3">Wyczyść</Button>
+                    Grid.Column="9"
+                    Content="Wyczyść"
+                    Style="{StaticResource ButtonTheme}"/>
 
 
         </Grid>
