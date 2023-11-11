@@ -13,3 +13,5 @@ D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.csproj.CoreCompileInputs.cache
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.exe
 D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.pdb
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Theme\TextBoxTheme.baml
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\App.baml

@@ -49,10 +49,10 @@
                      Grid.ColumnSpan="4"
                      Grid.Column="4"
                      Margin="15"
-                     Text="Tempo"
                      FontSize="23"
                      HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"/>
+                     VerticalContentAlignment="Center"
+                     Style="{StaticResource ShadowTextBox}"/>
 
             <Button Grid.Row="0" 
                     Grid.Column="8"
@@ -131,7 +131,7 @@
                 Grid.Column="8"
                 FontSize="26"
                 FontWeight="Bold"
-                Margin="3" Click="Button_Click">Zapisz</Button>
+                Margin="3">Zapisz</Button>
 
             <Button Grid.Row="2" 
                 Grid.Column="9"
@@ -143,7 +143,7 @@
                 Grid.Column="8"
                 FontSize="26"
                 FontWeight="Bold"
-                Margin="3" Click="Button_Click">Wczytaj</Button>
+                Margin="3">Wczytaj</Button>
 
             <Button Grid.Row="3" 
                 Grid.Column="9"
