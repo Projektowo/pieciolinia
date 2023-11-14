@@ -65,81 +65,83 @@
                     Style="{StaticResource ButtonTheme}"/>
 
 
-            <Canvas Grid.Row="1"
-                    Grid.ColumnSpan="8"
-                    x:Name="Canvas" 
-                    AllowDrop="True" 
-                    DragOver="CanvasDragOver"
-                    Drop="CanvasDrop"
-                    Background="#34324a">
+            <Canvas Name="MainCanvas" 
+                    PreviewDragEnter="Canvas_PreviewDragEnter" 
+                    DragOver="CanvasDragOver">
+
+                <Rectangle Fill="Red" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="31.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Green" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="144" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <Rectangle Fill="Blue" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="256.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Yellow" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="369" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
-                <Rectangle
-                    x:Name="Red"
-                    Fill="red"
-                    Height="50"
-                    Width="50"
-                    Canvas.Left="31"
-                    Canvas.Top="395"
-                    MouseMove="RectangleMouseMove"/>
+                <Rectangle Fill="Red" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="481.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
 
+                <Rectangle Fill="Green" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="594" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
 
-                <Rectangle
-    x:Name="Red2"
-    Fill="blue"
-    Height="50"
-    Width="50"
-    Canvas.Left="142"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red3"
-    Fill="yellow"
-    Height="50"
-    Width="50"
-    Canvas.Left="256"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red4"
-    Fill="green"
-    Height="50"
-    Width="50"
-    Canvas.Left="374"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red5"
-    Fill="red"
-    Height="50"
-    Width="50"
-    Canvas.Left="483"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red6"
-    Fill="blue"
-    Height="50"
-    Width="50"
-    Canvas.Left="590"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red7"
-    Fill="yellow"
-    Height="50"
-    Width="50"
-    Canvas.Left="708"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
-                <Rectangle
-    x:Name="Red8"
-    Fill="green"
-    Height="50"
-    Width="50"
-    Canvas.Left="816"
-    Canvas.Top="395"
-    MouseMove="RectangleMouseMove"/>
+                <Rectangle Fill="Blue" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="706.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Yellow" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="819" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+
             </Canvas>
 
 
