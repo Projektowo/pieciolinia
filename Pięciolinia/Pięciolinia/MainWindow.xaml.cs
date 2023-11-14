@@ -20,6 +20,28 @@ namespace Pięciolinia
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private void RectangleMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragDrop.DoDragDrop(Red, Red, DragDropEffects.Move);
+            }
+        }
+
+        private void CanvasDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void CanvasDragOver(object sender, DragEventArgs e)
+        {
+            Point dropPositione = e.GetPosition(Canvas);
+
+            Canvas.SetLeft(Red, dropPositione.X - 25);
+            Canvas.SetTop(Red, dropPositione.Y - 25);
+        }
+
         public MainWindow()
         {
             InitializeComponent();

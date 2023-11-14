@@ -12,7 +12,7 @@
 
     <Border Background="#272537"
             Padding="10">
-        <Grid>
+        <Grid AllowDrop="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -24,14 +24,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
 
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="4*"/>
+
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
@@ -46,8 +44,8 @@
                        Margin="25,0,0,0"/>
 
             <TextBox Grid.Row="0"
-                     Grid.ColumnSpan="4"
-                     Grid.Column="4"
+                     Grid.ColumnSpan="2"
+                     Grid.Column="2"
                      Margin="15"
                      FontSize="23"
                      HorizontalContentAlignment="Center"
@@ -55,101 +53,118 @@
                      Style="{StaticResource ShadowTextBox}"/>
 
             <Button Grid.Row="0" 
-                    Grid.Column="8"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
                     Content="PLAY"
                     Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="0" 
-                    Grid.Column="9"
+                    Grid.Column="6"
+                    Grid.ColumnSpan="2"
                     Content="STOP"
                     Style="{StaticResource ButtonTheme}"/>
 
 
+            <Canvas Grid.Row="1"
+                    Grid.ColumnSpan="8"
+                    x:Name="Canvas" 
+                    AllowDrop="True" 
+                    DragOver="CanvasDragOver"
+                    Drop="CanvasDrop"
+                    Background="#34324a">
 
-            <Rectangle
-                    Grid.Row="2"
+
+                <Rectangle
+                    x:Name="Red"
+                    Fill="red"
+                    Height="50"
+                    Width="50"
+                    Canvas.Left="31"
+                    Canvas.Top="395"
+                    MouseMove="RectangleMouseMove"/>
+
+
+                <Rectangle
+    x:Name="Red2"
+    Fill="blue"
+    Height="50"
+    Width="50"
+    Canvas.Left="142"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red3"
+    Fill="yellow"
+    Height="50"
+    Width="50"
+    Canvas.Left="256"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red4"
+    Fill="green"
+    Height="50"
+    Width="50"
+    Canvas.Left="374"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red5"
+    Fill="red"
+    Height="50"
+    Width="50"
+    Canvas.Left="483"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red6"
+    Fill="blue"
+    Height="50"
+    Width="50"
+    Canvas.Left="590"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red7"
+    Fill="yellow"
+    Height="50"
+    Width="50"
+    Canvas.Left="708"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+                <Rectangle
+    x:Name="Red8"
+    Fill="green"
+    Height="50"
+    Width="50"
+    Canvas.Left="816"
+    Canvas.Top="395"
+    MouseMove="RectangleMouseMove"/>
+            </Canvas>
+
+
+            <Button Grid.Row="3" 
                     Grid.Column="0"
-                    Grid.RowSpan="2"
-                    Fill="red"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.RowSpan="2"
-                    Fill="Blue"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Grid.RowSpan="2"   
-                    Fill="Green"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="3"
-                    Grid.RowSpan="2"
-                    Fill="Yellow"
-                    Height="50"
-                    Margin="5"/>
-
-            
-            
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="4"
-                    Grid.RowSpan="2"
-                    Fill="red"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="5"
-                    Grid.RowSpan="2"
-                    Fill="Blue"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="6"
-                    Grid.RowSpan="2"
-                    Fill="Green"
-                    Height="50"
-                    Margin="5"/>
-
-            <Rectangle
-                    Grid.Row="2"
-                    Grid.Column="7"
-                    Grid.RowSpan="2"
-                    Fill="Yellow"
-                    Height="50"
-                    Margin="5"/>
-
-            <Button Grid.Row="2" 
-                    Grid.Column="8"
+                    Grid.ColumnSpan="2"
                     Content="Zapisz"
                     Style="{StaticResource ButtonTheme}"/>
 
 
-            <Button Grid.Row="2" 
-                    Grid.Column="9"
+            <Button Grid.Row="3" 
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
                     Content="Eksportuj"
                     Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="3" 
-                    Grid.Column="8"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
                     Content="Wczytaj"
                     Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="3" 
-                    Grid.Column="9"
+                    Grid.Column="6"
+                    Grid.ColumnSpan="2"
                     Content="Wyczyść"
                     Style="{StaticResource ButtonTheme}"/>
 
