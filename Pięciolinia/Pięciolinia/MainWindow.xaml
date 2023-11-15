@@ -1,4 +1,4 @@
-﻿<Window x:Class="Pięciolinia.MainWindow"
+<Window x:Class="Pięciolinia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,28 +14,27 @@
 
 	<Border Background="#272537"
             Padding="10">
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
+
+        <Grid AllowDrop="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="4*"/>
-			</Grid.ColumnDefinitions>
 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="75"/>
-				<RowDefinition/>
-				<RowDefinition Height="50"/>
-				<RowDefinition Height="50"/>
-			</Grid.RowDefinitions>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
 
 
 
@@ -47,111 +46,132 @@
                        FontSize="26"
                        Margin="25,0,0,0"/>
 
-			<TextBox Grid.Row="0"
-                     Grid.ColumnSpan="4"
-                     Grid.Column="4"
+
+            <TextBox Grid.Row="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Column="2"
                      Margin="15"
                      FontSize="23"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center"
                      Style="{StaticResource ShadowTextBox}"/>
 
-			<Button Grid.Row="0"
-                    Grid.Column="8"
+
+            <Button Grid.Row="0" 
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
                     Content="PLAY"
                     Style="{StaticResource ButtonTheme}"/>
 
-			<Button Grid.Row="0"
-                    Grid.Column="9"
+            <Button Grid.Row="0" 
+                    Grid.Column="6"
+                    Grid.ColumnSpan="2"
                     Content="STOP"
                     Style="{StaticResource ButtonTheme}"/>
 
 
+            <Canvas Name="MainCanvas" 
+                    PreviewDragEnter="Canvas_PreviewDragEnter" 
+                    DragOver="CanvasDragOver">
 
-			<Rectangle
-                    Grid.Row="2"
+                <Rectangle Fill="Red" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="31.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Green" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="144" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+
+                <Rectangle Fill="Blue" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="256.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Yellow" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="369" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+
+
+                <Rectangle Fill="Red" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="481.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Green" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="594" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+
+                <Rectangle Fill="Blue" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="706.5" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+
+                <Rectangle Fill="Yellow" 
+                           Height="50" 
+                           Width="50" 
+                           Canvas.Left="819" 
+                           Canvas.Top="473"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+
+            </Canvas>
+
+
+            <Button Grid.Row="3" 
                     Grid.Column="0"
-                    Grid.RowSpan="2"
-                    Fill="red"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.RowSpan="2"
-                    Fill="Blue"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Grid.RowSpan="2"
-                    Fill="Green"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="3"
-                    Grid.RowSpan="2"
-                    Fill="Yellow"
-                    Height="50"
-                    Margin="5"/>
-
-
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="4"
-                    Grid.RowSpan="2"
-                    Fill="red"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="5"
-                    Grid.RowSpan="2"
-                    Fill="Blue"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="6"
-                    Grid.RowSpan="2"
-                    Fill="Green"
-                    Height="50"
-                    Margin="5"/>
-
-			<Rectangle
-                    Grid.Row="2"
-                    Grid.Column="7"
-                    Grid.RowSpan="2"
-                    Fill="Yellow"
-                    Height="50"
-                    Margin="5"/>
-
-			<Button Grid.Row="2"
-                    Grid.Column="8"
+                    Grid.ColumnSpan="2"
                     Content="Zapisz"
                     Style="{StaticResource ButtonTheme}"/>
 
 
-			<Button Grid.Row="2"
-                    Grid.Column="9"
+            <Button Grid.Row="3" 
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
                     Content="Eksportuj"
                     Style="{StaticResource ButtonTheme}"/>
 
-			<Button Grid.Row="3"
-                    Grid.Column="8"
+            <Button Grid.Row="3" 
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
                     Content="Wczytaj"
                     Style="{StaticResource ButtonTheme}"/>
 
-			<Button Grid.Row="3"
-                    Grid.Column="9"
+            <Button Grid.Row="3" 
+                    Grid.Column="6"
+                    Grid.ColumnSpan="2"
                     Content="Wyczyść"
                     Style="{StaticResource ButtonTheme}"/>
 
