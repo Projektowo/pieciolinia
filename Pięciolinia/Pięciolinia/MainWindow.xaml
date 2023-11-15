@@ -8,8 +8,7 @@
         Title="Pięciolinia" Height="600" Width="920"
 		Icon="Icons/Ikona1.ico"
         WindowStyle="SingleBorderWindow"
-        Background="Transparent"
-		>
+        Background="Transparent">
 	
 
 	<Border Background="#272537"
@@ -71,14 +70,16 @@
 
 
             <Canvas Name="MainCanvas" 
-                    PreviewDragEnter="Canvas_PreviewDragEnter" 
+                    PreviewDragEnter="Canvas_PreviewDragEnter"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="8"
                     DragOver="CanvasDragOver">
 
                 <Rectangle Fill="Red" 
                            Height="50" 
                            Width="50" 
                            Canvas.Left="31.5" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
@@ -87,7 +88,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="144" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
@@ -96,7 +97,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="256.5" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
@@ -105,7 +106,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="369" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
@@ -115,7 +116,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="481.5" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
@@ -124,7 +125,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="594" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
@@ -133,7 +134,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="706.5" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
@@ -142,7 +143,7 @@
                            Height="50" 
                            Width="50" 
                            Canvas.Left="819" 
-                           Canvas.Top="473"
+                           Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>

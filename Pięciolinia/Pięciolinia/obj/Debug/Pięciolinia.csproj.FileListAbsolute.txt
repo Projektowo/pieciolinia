@@ -36,3 +36,5 @@ C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pię
 C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.pdb
 C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia_Content.g.cs
 C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\bin\Debug\Icons\Ikona1.ico
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\bin\Debug\Icons\Ikona1.ico
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia_Content.g.cs
