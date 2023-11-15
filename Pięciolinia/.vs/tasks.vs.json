@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "zadanie-Ikona1",
+      "appliesTo": "Pięciolinia/Icons/Ikona1.ico",
+      "type": "launch"
+    }
+  ]
+}
