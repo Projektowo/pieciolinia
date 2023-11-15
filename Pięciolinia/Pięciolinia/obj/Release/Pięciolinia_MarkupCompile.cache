@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\
+C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Release\
 Pięciolinia
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\App.xaml
 3321436143
 1-291276104
@@ -16,5 +16,5 @@ C:\Users\Kamil\source\repos\pieciolinia\Pięciolinia\Pięciolinia\App.xaml
 13-1310406943
 MainWindow.xaml;Theme\ButtonTheme.xaml;Theme\TextBoxTheme.xaml;
 
-False
+True
 
