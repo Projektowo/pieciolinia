@@ -20,7 +20,7 @@
                                      x:Name="SearchBox"/>
 
                             <TextBlock IsHitTestVisible="False"
-                                       Text="Tempo"
+                                       Text="Takt"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10 0 0 0"
