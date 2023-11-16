@@ -53,8 +53,10 @@
                      FontSize="23"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center"
-                     Style="{StaticResource ShadowTextBox}"/>
-
+                     Name="Takt"
+                     MaxLength="5"
+                     Style="{StaticResource ShadowTextBox}" PreviewTextInput="TactValidation"/>
+            
 
             <Button Grid.Row="0" 
                     Grid.Column="4"
