@@ -106,15 +106,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="Images\" />
     <Folder Include="MVVM\Model\" />
     <Folder Include="MVVM\ViewModel\" />
     <Folder Include="MVVM\View\" />
   </ItemGroup>
-	<ItemGroup>
-		<Content Include="Icons\Ikona1.ico">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Content Include="Icons\Ikona1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\calanuta.png" />
+    <Resource Include="Images\cwiercnuta.png" />
+    <Resource Include="Images\klucz.png" />
+    <Resource Include="Images\półnuta.png" />
+    <Resource Include="Images\szesnastka.png" />
+    <Resource Include="Images\ósemkapojedynczo.png" />
+    <Resource Include="Images\ósemka.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

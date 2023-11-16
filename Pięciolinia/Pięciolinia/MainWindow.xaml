@@ -77,78 +77,110 @@
                     Grid.ColumnSpan="8"
                     DragOver="CanvasDragOver">
 
-                <Rectangle Fill="Red" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="31.5" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Green" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="144" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/półnuta.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Blue" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="256.5" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/cwiercnuta.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Yellow" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="369" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/ósemkapojedynczo.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
 
-                <Rectangle Fill="Red" 
+                <Rectangle 
                            Height="50" 
                            Width="50" 
                            Canvas.Left="481.5" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/ósemka.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Green" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="594" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/szesnastka.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Blue" 
+                <Rectangle 
                            Height="50" 
                            Width="50" 
                            Canvas.Left="706.5" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" />
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-                <Rectangle Fill="Yellow" 
+                <Rectangle
                            Height="50" 
                            Width="50" 
                            Canvas.Left="819" 
                            Canvas.Top="350"
                            PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp"/>
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
             </Canvas>
 
