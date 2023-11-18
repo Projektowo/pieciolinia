@@ -9,9 +9,9 @@
 		Icon="Icons/Ikona1.ico"
         WindowStyle="SingleBorderWindow"
         Background="Transparent">
-	
 
-	<Border Background="#272537"
+
+    <Border Background="#272537"
             Padding="10">
 
         <Grid AllowDrop="True">
@@ -21,10 +21,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
 
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
 
             </Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
 
 
 
-			<TextBlock Text="Pięciolinia"
+            <TextBlock Text="Pięciolinia"
                        Grid.ColumnSpan="4"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
@@ -56,7 +56,7 @@
                      Name="Takt"
                      MaxLength="5"
                      Style="{StaticResource ShadowTextBox}" PreviewTextInput="TactValidation"/>
-            
+
 
             <Button Grid.Row="0" 
                     Grid.Column="4"
@@ -76,6 +76,24 @@
                     Grid.Row="1"
                     Grid.ColumnSpan="8"
                     DragOver="CanvasDragOver">
+
+                <Rectangle
+                           Height="246" 
+                           Width="272" 
+                           Canvas.Left="34" 
+                           Canvas.Top="67">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Images/pieciolinia.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
 
                 <Rectangle
                            Height="50" 
@@ -211,8 +229,8 @@
                     Style="{StaticResource ButtonTheme}"/>
 
 
-		</Grid>
-	</Border>
+        </Grid>
+    </Border>
 
 
 </Window>

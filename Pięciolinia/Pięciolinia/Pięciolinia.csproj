@@ -114,6 +114,7 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\pieciolinia.png" />
     <Resource Include="Images\pauza.png" />
     <Resource Include="Images\calanuta.png" />
     <Resource Include="Images\cwiercnuta.png" />
