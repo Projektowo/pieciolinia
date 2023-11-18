@@ -99,7 +99,7 @@
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/półnuta.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Images/polnuta.png" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
                 </Rectangle>
 
@@ -125,7 +125,7 @@
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/ósemkapojedynczo.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Images/osemkapojedynczo.png" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
                 </Rectangle>
 
@@ -139,7 +139,7 @@
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/ósemka.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Images/osemkapodwojna.png" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
                 </Rectangle>
 
@@ -165,7 +165,7 @@
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Images/szesnastkapodwojna.png" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
                 </Rectangle>
 
@@ -178,7 +178,7 @@
                            PreviewMouseMove="Rectangle_PreviewMouseMove"
                            PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Images/pauza.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
 
