@@ -114,12 +114,12 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\polnuta.png" />
+    <Resource Include="Images\calanuta.png" />
     <Resource Include="Images\pieciolinia.png" />
     <Resource Include="Images\pauza.png" />
-    <Resource Include="Images\calanuta.png" />
     <Resource Include="Images\cwiercnuta.png" />
     <Resource Include="Images\klucz.png" />
-    <Resource Include="Images\polnuta.png" />
     <Resource Include="Images\szesnastka.png" />
     <Resource Include="Images\szesnastkapodwojna.png" />
     <Resource Include="Images\osemkapojedynczo.png" />
