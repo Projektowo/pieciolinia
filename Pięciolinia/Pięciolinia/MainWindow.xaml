@@ -32,6 +32,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
@@ -62,7 +63,7 @@
                     Grid.Column="4"
                     Grid.ColumnSpan="2"
                     Content="PLAY"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}" Click="Button_Click"/>
 
             <Button Grid.Row="0" 
                     Grid.Column="6"
@@ -95,113 +96,121 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="31.5" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="144" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/polnuta.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="256.5" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/cwiercnuta.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="369" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/osemkapojedynczo.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-
-                <Rectangle 
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="481.5" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/osemkapodwojna.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="594" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/szesnastka.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle 
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="706.5" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/szesnastkapodwojna.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                           Height="50" 
-                           Width="50" 
-                           Canvas.Left="819" 
-                           Canvas.Top="350"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/pauza.png"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
             </Canvas>
 
+            <Rectangle
+                Height="50" 
+                Width="50" 
+                Grid.Row="2" 
+                Grid.Column="0"
+                Grid.ColumnSpan="1"
+                PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                PreviewMouseMove="Rectangle_PreviewMouseMove"
+                PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle
+                   Height="50" 
+                   Width="50" 
+                          Grid.Row="2" 
+     Grid.Column="1"
+     Grid.ColumnSpan="1"
+                   PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                   PreviewMouseMove="Rectangle_PreviewMouseMove"
+                   PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/polnuta.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+
+            <Rectangle
+                           Height="50" 
+                           Width="50" 
+                                            Grid.Row="2" 
+ Grid.Column="2"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/cwiercnuta.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle
+                           Height="50" 
+                           Width="50" 
+                                               Grid.Row="2" 
+ Grid.Column="3"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/osemkapojedynczo.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+
+            <Rectangle 
+                           Height="50" 
+                           Width="50" 
+                                               Grid.Row="2" 
+ Grid.Column="4"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/osemkapodwojna.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle
+                           Height="50" 
+                           Width="50" 
+                                             Grid.Row="2" 
+ Grid.Column="5"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/szesnastka.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle 
+                           Height="50" 
+                           Width="50" 
+                                             Grid.Row="2" 
+ Grid.Column="6"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/szesnastkapodwojna.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle
+                           Height="50" 
+                           Width="50" 
+                                      Grid.Row="2" 
+ Grid.Column="7"
+ Grid.ColumnSpan="1"
+                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                           PreviewMouseMove="Rectangle_PreviewMouseMove"
+                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" Canvas.Left="793" Canvas.Top="350">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Images/pauza.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
             <Button Grid.Row="3" 
                     Grid.Column="0"

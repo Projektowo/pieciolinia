@@ -106,6 +106,9 @@ namespace Pięciolinia
         public MainWindow()
         {
             InitializeComponent();
+            this.MinWidth = 920;
+            this.MinHeight = 600;
+
         }
 
         private void TactValidation(object sender, TextCompositionEventArgs e)
@@ -114,5 +117,9 @@ namespace Pięciolinia
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
