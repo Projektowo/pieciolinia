@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Pięciolinia.MVVM.Model
 {
-    internal class NoteType
+    public enum NoteType
     {
+        WholeNote,
+        HalfNote,
+        QuarterNote,
+        EighthNote
     }
 }
