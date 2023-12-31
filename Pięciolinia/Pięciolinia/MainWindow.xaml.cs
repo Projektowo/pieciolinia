@@ -16,96 +16,18 @@ using System.Windows.Shapes;
 
 namespace Pięciolinia
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
-        //private void RectangleMouseMove1(object sender, MouseEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //    {
-        //        DragDrop.DoDragDrop(Red1, Red1, DragDropEffects.Move);
-        //    }
-        //}
-
-
-        private void CanvasDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        //private void CanvasDragOver(object sender, DragEventArgs e)
-        //{
-        //    Point dropPositione = e.GetPosition(Canvas);
-
-        //    Canvas.SetLeft(Red, dropPositione.X - 25);
-        //    Canvas.SetTop(Red, dropPositione.Y - 25);
-        //}
-
-        private void CanvasDragOver(object sender, DragEventArgs e)
-        {
-            if (sender is Rectangle draggedRectangle)
-            {
-                Point dropPosition = e.GetPosition(MainCanvas);
-
-                Canvas.SetLeft(draggedRectangle, dropPosition.X - (draggedRectangle.Width / 2));
-                Canvas.SetTop(draggedRectangle, dropPosition.Y - (draggedRectangle.Height / 2));
-            }
-        }
-
-        private bool isDragging = false;
-        private Point offset;
-
-        private void Canvas_PreviewDragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Text))
-            {
-                if (e.Source is Rectangle draggedRectangle)
-                {
-                    draggedRectangle.DragEnter += Rectangle_DragEnter;
-                    draggedRectangle.Stroke = Brushes.Blue;
-                    e.Effects = DragDropEffects.Copy;
-                }
-            }
-        }
-
-        private void Rectangle_DragEnter(object sender, DragEventArgs e)
-        {
-            // Your DragEnter logic for individual rectangles
-        }
-
-        private void Rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            isDragging = true;
-            offset = e.GetPosition((UIElement)sender);
-            ((UIElement)sender).CaptureMouse();
-        }
-
-        private void Rectangle_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                Point currentPosition = e.GetPosition(MainCanvas);
-                double newX = currentPosition.X - offset.X;
-                double newY = currentPosition.Y - offset.Y;
-
-                Canvas.SetLeft((UIElement)sender, newX);
-                Canvas.SetTop((UIElement)sender, newY);
-            }
-        }
-
-        private void Rectangle_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            isDragging = false;
-            ((UIElement)sender).ReleaseMouseCapture();
-        }
-
+        private UIElement selectedElement;
+        private UIElement[] elements;
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeElements();
+            SelectElement(elements[0]);
+            SelectElement(elementImage1);
             this.MinWidth = 920;
             this.MinHeight = 600;
 
@@ -117,9 +39,72 @@ namespace Pięciolinia
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void InitializeElements()
         {
-
+            // Add all your Image controls to the array
+            elements = new UIElement[] { elementImage1, elementImage2 };
         }
+
+        private void SelectElement(UIElement element)
+        {
+            // Deselect the currently selected element
+            if (selectedElement != null)
+            {
+                // Adjust any visual changes as needed
+            }
+
+            // Select the new element
+            selectedElement = element;
+            // Highlight the selected element, adjust any visual changes as needed
+        }
+
+        private void AddColumnButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddColumnToGrid();
+        }
+
+        private void AddColumnToGrid()
+        {
+            ColumnDefinition columnDefinition = new ColumnDefinition();
+            mainGrid.ColumnDefinitions.Add(columnDefinition);
+
+            // Add content to the new column if needed
+            // For example, add a button in the new column
+            Button newButton = new Button();
+            newButton.Content = "New Button";
+            Grid.SetColumn(newButton, mainGrid.ColumnDefinitions.Count - 1); // Set the button to the last column
+            mainGrid.Children.Add(newButton);
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            double step = 5; // Set the step size for movement
+
+            switch (e.Key)
+            {
+                case Key.Left:
+                    // Move the selection to the previous element
+                    int currentIndex = Array.IndexOf(elements, selectedElement);
+                    int newIndex = (currentIndex - 1 + elements.Length) % elements.Length;
+                    SelectElement(elements[newIndex]);
+                    break;
+
+                case Key.Right:
+                    // Move the selection to the next element
+                    currentIndex = Array.IndexOf(elements, selectedElement);
+                    newIndex = (currentIndex + 1) % elements.Length;
+                    SelectElement(elements[newIndex]);
+                    break;
+
+                case Key.Up:
+                    Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                    break;
+
+                case Key.Down:
+                    Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                    break;
+            }
+        }
+
     }
 }

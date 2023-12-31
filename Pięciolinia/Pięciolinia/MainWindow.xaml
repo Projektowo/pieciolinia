@@ -8,7 +8,8 @@
         Title="Pięciolinia" Height="600" Width="920"
 		Icon="Icons/Ikona1.ico"
         WindowStyle="SingleBorderWindow"
-        Background="Transparent">
+        Background="Transparent"
+        KeyDown="MainWindow_KeyDown">
 
 
     <Border Background="#272537"
@@ -25,18 +26,58 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-
-
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
+            <Grid Grid.Row="1"
+                  Grid.ColumnSpan="8"
+                  x:Name="mainGrid">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+
+                <Image x:Name="elementImage1" 
+                       Source="/Images/cwiercnuta.png" 
+                       Width="50" Height="50"
+                       Grid.Column="0"
+                       Grid.Row="4"/>
+                
+                <Image x:Name="elementImage2" 
+                       Source="/Images/cwiercnuta.png" 
+                       Width="50" Height="50"
+                       Grid.Column="2"
+                       Grid.Row="8"/>
+            </Grid>
+
+            <Button Content="Add Column" Click="AddColumnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
 
             <TextBlock Text="Pięciolinia"
                        Grid.ColumnSpan="4"
@@ -63,7 +104,7 @@
                     Grid.Column="4"
                     Grid.ColumnSpan="2"
                     Content="PLAY"
-                    Style="{StaticResource ButtonTheme}" Click="Button_Click"/>
+                    Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="0" 
                     Grid.Column="6"
@@ -71,146 +112,6 @@
                     Content="STOP"
                     Style="{StaticResource ButtonTheme}"/>
 
-
-            <Canvas Name="MainCanvas" 
-                    PreviewDragEnter="Canvas_PreviewDragEnter"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="8"
-                    DragOver="CanvasDragOver">
-
-                <Rectangle
-                           Height="246" 
-                           Width="272" 
-                           Canvas.Left="34" 
-                           Canvas.Top="67">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Images/pieciolinia.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-            </Canvas>
-
-            <Rectangle
-                Height="50" 
-                Width="50" 
-                Grid.Row="2" 
-                Grid.Column="0"
-                Grid.ColumnSpan="1"
-                PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                PreviewMouseMove="Rectangle_PreviewMouseMove"
-                PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/calanuta.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle
-                   Height="50" 
-                   Width="50" 
-                          Grid.Row="2" 
-     Grid.Column="1"
-     Grid.ColumnSpan="1"
-                   PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                   PreviewMouseMove="Rectangle_PreviewMouseMove"
-                   PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/polnuta.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-
-            <Rectangle
-                           Height="50" 
-                           Width="50" 
-                                            Grid.Row="2" 
- Grid.Column="2"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/cwiercnuta.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle
-                           Height="50" 
-                           Width="50" 
-                                               Grid.Row="2" 
- Grid.Column="3"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/osemkapojedynczo.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-
-            <Rectangle 
-                           Height="50" 
-                           Width="50" 
-                                               Grid.Row="2" 
- Grid.Column="4"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/osemkapodwojna.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle
-                           Height="50" 
-                           Width="50" 
-                                             Grid.Row="2" 
- Grid.Column="5"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/szesnastka.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle 
-                           Height="50" 
-                           Width="50" 
-                                             Grid.Row="2" 
- Grid.Column="6"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/szesnastkapodwojna.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle
-                           Height="50" 
-                           Width="50" 
-                                      Grid.Row="2" 
- Grid.Column="7"
- Grid.ColumnSpan="1"
-                           PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                           PreviewMouseMove="Rectangle_PreviewMouseMove"
-                           PreviewMouseLeftButtonUp="Rectangle_PreviewMouseLeftButtonUp" Canvas.Left="793" Canvas.Top="350">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Images/pauza.png"/>
-                </Rectangle.Fill>
-            </Rectangle>
 
             <Button Grid.Row="3" 
                     Grid.Column="0"
