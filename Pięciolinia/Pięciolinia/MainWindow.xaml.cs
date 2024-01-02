@@ -142,7 +142,6 @@ namespace Pięciolinia
             switch (e.Key)
             {
                 case Key.A:
-                case Key.Left:
                     // wybierz element do lewej
                     int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
                     int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
@@ -150,7 +149,6 @@ namespace Pięciolinia
                     break;
 
                 case Key.D:
-                case Key.Right:
                     // wybierz element do prawej
                     currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
                     newIndex = (currentIndex + 1) % elementInfoList.Count;
@@ -158,7 +156,6 @@ namespace Pięciolinia
                     break;
 
                 case Key.W:
-                case Key.Up:
                     //przesunięcie nuty wyżej
                     if (Grid.GetRow(selectedElement) - 1 != -1)
                     {
@@ -168,7 +165,6 @@ namespace Pięciolinia
                     break;
 
                 case Key.S:
-                case Key.Down:
                     //przesunięcie nuty niżej
                     if (Grid.GetRow(selectedElement) - 1 != 11)
                     {
