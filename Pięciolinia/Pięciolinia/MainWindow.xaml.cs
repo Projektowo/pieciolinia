@@ -117,7 +117,7 @@ namespace Pięciolinia
                 selectedElementInfo.UpDownValue += direction;
 
                 // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
-                // MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
+                MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
             }
         }
 
@@ -138,6 +138,7 @@ namespace Pięciolinia
             switch (e.Key)
             {
                 case Key.A:
+                case Key.Left:
                     // wybierz element do lewej
                     int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
                     int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
@@ -145,6 +146,7 @@ namespace Pięciolinia
                     break;
 
                 case Key.D:
+                case Key.Right:
                     // wybierz element do prawej
                     currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
                     newIndex = (currentIndex + 1) % elementInfoList.Count;
@@ -152,23 +154,33 @@ namespace Pięciolinia
                     break;
 
                 case Key.W:
+                case Key.Up:
                     //przesunięcie nuty wyżej
-                    Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
-                    ChangeUpDownValue(1);
+                    if (Grid.GetRow(selectedElement) - 1 != -1)
+                    {
+                        Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                        ChangeUpDownValue(1);
+                    }
                     break;
 
                 case Key.S:
+                case Key.Down:
                     //przesunięcie nuty niżej
-                    Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
-                    ChangeUpDownValue(-1);
+                    if (Grid.GetRow(selectedElement) - 1 != 10)
+                    {
+                        Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                        ChangeUpDownValue(-1);
+                    }
                     break;
 
                 case Key.E:
+                case Key.OemPlus:
                     // zwiększenie indexu obrazu o jeden
                     ChangeImage(1);
                     break;
 
                 case Key.Q:
+                case Key.OemMinus:
                     // zmniejszenie indexu obrazu o jeden
                     ChangeImage(-1);
                     break;
