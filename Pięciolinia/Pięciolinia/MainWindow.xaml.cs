@@ -19,7 +19,7 @@ namespace Pięciolinia
         private UIElement selectedElement; 
 
         // lista z danymi dla każdej nuty
-        private List<ElementInfo> elementInfoList; 
+        private List<ElementInfo> elementInfoList;
 
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
@@ -29,9 +29,10 @@ namespace Pięciolinia
             //inizjalizacja
             InitializeComponent();
             InitializeElements();
+           
 
             //wybranie pierwszego elementu
-            SelectElement(elementInfoList[0].Element);
+            //SelectElement(elementInfoList[0].Element);
 
             // auto focus textboxa
             inputTextBox.Focus();
@@ -43,19 +44,19 @@ namespace Pięciolinia
             // tablica do której dodaje się nuty
             elementInfoList = new List<ElementInfo>
             {
-                new ElementInfo { Element = elementImage1 },
-                new ElementInfo { Element = elementImage2 },
+                //new ElementInfo { Element = elementImage1 },
+                //new ElementInfo { Element = elementImage2 },
                 // dodatkowe elementy >> here <<
             };
 
 
-            //indexy obrazów poszczególnych elementów
-            foreach (var elementInfo in elementInfoList)
-            {
-                elementInfo.ImagePaths = sharedImagePaths;
-                elementInfo.CurrentImageIndex = 0;
-                elementInfo.UpDownValue = 6; // 6 to wartość początkowa >> DO UZGODNIENIA <<
-            }
+            ////indexy obrazów poszczególnych elementów
+            //foreach (var elementInfo in elementInfoList)
+            //{
+            //    elementInfo.ImagePaths = sharedImagePaths;
+            //    elementInfo.CurrentImageIndex = 0;
+            //    elementInfo.UpDownValue = 6; // 6 to wartość początkowa >> DO UZGODNIENIA <<
+            //}
         }
 
 
