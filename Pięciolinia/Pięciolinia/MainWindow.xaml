@@ -35,53 +35,60 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            
-            <!--grid w którym znajdują się nudy, takty-->
-            <Grid Grid.Row="1"
-                  Grid.ColumnSpan="8"
-                  x:Name="mainGrid">
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+            <!-- scroll viewer umożliwiający scrollowanie nut w poziomie (i pionie jak się ustawi) -->
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Disabled"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="8"
+                          Style="{StaticResource DarkHorizontalScrollBarViewerStyle}">
+                <!--grid w którym znajdują się nuty, takty-->
+                <Grid Grid.Row="1"
+                      Grid.ColumnSpan="8"
+                      x:Name="mainGrid">
 
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
 
-                <!--pierwsze nutki-->
-                <Image x:Name="elementImage1" 
-                       Source="/Images/cwiercnuta.png" 
-                       Width="50" Height="50"
-                       Grid.Column="0"
-                       Grid.Row="4"/>
-                
-                <Image x:Name="elementImage2" 
-                       Source="/Images/cwiercnuta.png" 
-                       Width="50" Height="50"
-                       Grid.Column="2"
-                       Grid.Row="8"/>
-            </Grid>
+                    <!--pierwsze nutki-->
+                    <Image x:Name="elementImage1" 
+                           Source="/Images/calanuta.png" 
+                           Width="50" Height="50"
+                           Grid.Column="0"
+                           Grid.Row="6"/>
+
+                    <Image x:Name="elementImage2" 
+                           Source="/Images/calanuta.png" 
+                           Width="50" Height="50"
+                           Grid.Column="2"
+                           Grid.Row="6"/>
+                </Grid>
+            </ScrollViewer>
 
             <!--przycisk dodajacy takt-->
-            <Button Content="Dodaj takt" Click="AddColumnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+            <Button Name="button1" Content="Dodaj takt" Click="AddColumnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
 
             <TextBlock Text="Pięciolinia"
                        Grid.ColumnSpan="4"

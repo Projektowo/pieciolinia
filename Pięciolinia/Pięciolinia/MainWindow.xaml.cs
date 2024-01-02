@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Pięciolinia
 {
@@ -20,46 +12,58 @@ namespace Pięciolinia
     {
 
         //elementy które są nutami
-        private UIElement selectedElement;
-        private UIElement[] elements;
+        private UIElement selectedElement; 
+
+        // lista z danymi dla każdej nuty
+        private List<ElementInfo> elementInfoList; 
+
+        //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
+        private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
         public MainWindow()
         {
+            //inizjalizacja
             InitializeComponent();
             InitializeElements();
-            SelectElement(elements[0]);
-            SelectElement(elementImage1);
 
-        }
-
-
-        //walidacja textboxa na takt
-        private void TactValidation(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9/]+");
-            e.Handled = regex.IsMatch(e.Text);
+            //wybranie pierwszego elementu
+            SelectElement(elementInfoList[0].Element);
         }
 
         //inicjalizowanie elementów/nut dodając je do tablicy
         private void InitializeElements()
         {
-            // Add all your Image controls to the array
-            elements = new UIElement[] { elementImage1, elementImage2 };
+            // tablica do której dodaje się nuty
+            elementInfoList = new List<ElementInfo>
+            {
+                new ElementInfo { Element = elementImage1 },
+                new ElementInfo { Element = elementImage2 },
+                // dodatkowe elementy >> here <<
+            };
+
+
+            //indexy obrazów poszczególnych elementów
+            foreach (var elementInfo in elementInfoList)
+            {
+                elementInfo.ImagePaths = sharedImagePaths;
+                elementInfo.CurrentImageIndex = 0;
+                elementInfo.UpDownValue = 6; // 6 to wartość początkowa >> DO UZGODNIENIA <<
+            }
         }
 
 
         //wybieranie nuty za pomocą klawiszy lewo/prawo
         private void SelectElement(UIElement element)
         {
-            // Deselect the currently selected element
+            // odznacza aktywny element
             if (selectedElement != null)
             {
-                // Adjust any visual changes as needed
+                // jakieś wizualne pierdoły można tu dodać
             }
 
-            // Select the new element
+            // wybranie nowego elementu
             selectedElement = element;
-            // Highlight the selected element, adjust any visual changes as needed
+            // znowu wizualne bzdety
         }
 
 
@@ -83,36 +87,132 @@ namespace Pięciolinia
             mainGrid.Children.Add(newButton);
         }
 
+        // podmiana grafiki danego elementu
+        private void ChangeImage(int direction)
+        {
+            // pobranie danych aktualnego elementu
+            ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
+
+            if (selectedElementInfo != null)
+            {
+                // wyciągnięcie indexu aktualnej grafiki elementu
+                selectedElementInfo.CurrentImageIndex = (selectedElementInfo.CurrentImageIndex + direction + selectedElementInfo.ImagePaths.Length) % selectedElementInfo.ImagePaths.Length;
+
+                if (selectedElement is Image image)
+                {
+                    // podmiana grafiki na adekwatną
+                    image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(selectedElementInfo.ImagePaths[selectedElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
+                }
+            }
+        }
+
+        private void ChangeUpDownValue(int direction)
+        {
+            // pobranie danych aktualnego elementu
+            ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
+
+            if (selectedElementInfo != null)
+            {
+                // zmiana wartości zmiennej mówiącej o pozycji na pięciolini (góra/dół)
+                selectedElementInfo.UpDownValue += direction;
+
+                // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
+                // MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
+            }
+        }
+
+
+        // mówi samo za siebie
+        private class ElementInfo
+        {
+            public UIElement Element { get; set; }
+            public string[] ImagePaths { get; set; }
+            public int CurrentImageIndex { get; set; }
+            public int UpDownValue { get; set; }
+        }
+
 
         //logika strzałek/klawiszy
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
-                case Key.Left:
-                    // zmiana nuty na nutę po lewej
-                    int currentIndex = Array.IndexOf(elements, selectedElement);
-                    int newIndex = (currentIndex - 1 + elements.Length) % elements.Length;
-                    SelectElement(elements[newIndex]);
+                case Key.A:
+                    // wybierz element do lewej
+                    int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
+                    int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
+                    SelectElement(elementInfoList[newIndex].Element);
                     break;
 
-                case Key.Right:
-                    // zmiana nuty na nutę po prawej
-                    currentIndex = Array.IndexOf(elements, selectedElement);
-                    newIndex = (currentIndex + 1) % elements.Length;
-                    SelectElement(elements[newIndex]);
+                case Key.D:
+                    // wybierz element do prawej
+                    currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
+                    newIndex = (currentIndex + 1) % elementInfoList.Count;
+                    SelectElement(elementInfoList[newIndex].Element);
                     break;
 
-                case Key.Up:
+                case Key.W:
                     //przesunięcie nuty wyżej
                     Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                    ChangeUpDownValue(1);
                     break;
 
-                case Key.Down:
+                case Key.S:
                     //przesunięcie nuty niżej
                     Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                    ChangeUpDownValue(-1);
+                    break;
+
+                case Key.E:
+                    // zwiększenie indexu obrazu o jeden
+                    ChangeImage(1);
+                    break;
+
+                case Key.Q:
+                    // zmniejszenie indexu obrazu o jeden
+                    ChangeImage(-1);
                     break;
             }
+        }
+
+        //walidacja textboxa na takt za pomocą regexa
+
+            //        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣴⣶⣿⣿⣿⠳⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣻⣿⣿⠠⢼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡿⢿⣭⠽⠿⣿⠀⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡋⣷⠿⠀⢀⣿⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠶⢺⢦⣄⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠁⠂⢀⢠⡌⢹⠀⢸⠀⠀⣀⣤⡴⠖⠒⠋⠉⠀⠀⠀⢸⡀⠙⣧⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡖⢺⣌⠉⢸⣿⣶⢾⡛⣿⣅⣿⣷⣶⠠⢤⡀⠀⠀⠀⢸⡇⠈⣏⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣿⡟⢛⣿⣶⣾⣿⣿⡀⠸⣿⠟⠟⢿⡏⣦⣼⡆⠀⠀⢀⣸⡇⠀⣿⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⣀⣠⣴⣶⣾⢿⢹⡏⣉⠉⣻⣿⠈⣿⡶⠰⡷⢻⠏⠀⡇⣼⣴⣿⣿⣷⣶⣿⣿⣿⣿⣦⣿⠀⠀⠀⠀⠀⠀
+            //⢀⣠⣤⡴⣶⡿⣏⣿⣿⣿⣿⣿⣿⡇⠁⠘⣻⡟⠘⣿⣧⣰⣷⣾⣼⣷⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀
+            //⢸⡟⣾⣷⣥⣠⣋⠻⢿⣿⡋⣿⢸⣇⣴⣾⡿⢄⢠⡿⣿⣿⣿⣿⣿⣿⠿⡟⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⢸⡷⡏⠃⣄⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⠹⣿⣼⡾⣟⣿⣿⢿⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⢸⣇⣧⣦⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⣿⠀⠀⣸⣇⣹⣿⠁⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠙⠻⣿⣿⣿⠿⠛⠛⠋⠉⠁⠀⠀⠀⣿⠀⠀⣾⣏⠉⢸⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠿⡷⠾⠛⠙⠓⠾⢦⣼⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣧⣶⣾⣿⣤⣤⠄⠀⠉⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣏⣙⣿⣿⣿⣿⣶⡖⠀⠀⠈⠲⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣭⠟⠛⠿⣯⡈⢻⣿⣿⣧⡀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣦⣀⣏⣦⢹⣿⣿⣿⣿⡯⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣏⠀⢉⣽⢻⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⡿⡿⠿⣿⣿⣿⣿⢿⣿⣯⣳⡀⠀⠀⠀⢹⡄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣦⣿⣿⠿⣯⣽⣿⠘⣿⣿⣿⣿⣗⠄⠀⠈⠛⠻⣿⡷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡏⠀⣿⡿⣿⠀⢿⣿⣿⣿⢿⠃⠀⠀⠀⠀⣇⣷⡸⡟⠶⣤⡀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⠈⣾⠏⠀⣿⠀⢸⣿⠏⠙⢾⣄⠀⠀⠀⠀⡿⣿⣇⣧⠀⠀⠉⠳⢤⡄⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣿⢨⠘⠀⠀⣾⠀⢸⣿⣷⣄⣀⠙⢷⣤⣦⣠⡇⣿⡟⢻⠀⠀⠀⠀⠈⢻⠶⣤⣀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣻⠀⠀⠀⣛⠀⢸⠉⠻⠿⣿⣶⣀⠙⢾⣿⠁⣿⣿⠘⣇⠀⠀⠀⠀⠈⣷⠀⠁
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡆⠀⠀⠀⢹⡄⢸⠀⠀⠀⠨⣿⣿⣿⣾⣿⠘⣿⣿⠀⠋⠀⠀⠀⠀⠀⠛⠃⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠿⠇⠀⠀⠀⢸⡇⠸⠄⠀⠀⣸⣿⣿⣿⣿⢃⣈⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠾⠇⠀⠀⠀⠀⢼⣿⣿⣿⣷⣾⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡏⢻⣧⣩⣽⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣬⣿⣿⠃⠈⢿⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠟⠀⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        private void TactValidation(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9/]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }

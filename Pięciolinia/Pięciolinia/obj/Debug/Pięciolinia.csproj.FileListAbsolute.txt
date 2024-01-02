@@ -58,3 +58,4 @@ C:\Users\krzys\Source\Repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pię
 C:\Users\krzys\Source\Repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.csproj.CoreCompileInputs.cache
 C:\Users\krzys\Source\Repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.exe
 C:\Users\krzys\Source\Repos\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Pięciolinia.pdb
+D:\visual\projekty\pieciolinia\Pięciolinia\Pięciolinia\obj\Debug\Theme\DarkScrollBarTheme.baml
