@@ -70,25 +70,14 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-
-
-                    <!--pierwsze nutki-->
-                    <Image x:Name="elementImage1" 
-                           Source="/Images/calanuta.png" 
-                           Width="50" Height="50"
-                           Grid.Column="0"
-                           Grid.Row="6"/>
-
-                    <Image x:Name="elementImage2" 
-                           Source="/Images/calanuta.png" 
-                           Width="50" Height="50"
-                           Grid.Column="2"
-                           Grid.Row="6"/>
                 </Grid>
             </ScrollViewer>
 
-            <!--przycisk dodajacy takt-->
-            <Button Name="button1" Content="Dodaj takt" Click="AddColumnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+            <!--przycisk dodający takt-->
+            <Button Content="+" Click="AddColumnButton_Click" Width="25" Height="25" Margin="5"
+                    Style="{StaticResource ButtonTheme}"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"/>
 
             <TextBlock Text="Pięciolinia"
                        Grid.ColumnSpan="4"
@@ -106,9 +95,11 @@
                      FontSize="23"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center"
-                     Name="Takt"
+                     Style="{StaticResource DarkTextBoxStyle}"
+                     x:Name="inputTextBox"
                      MaxLength="5"
-                     Style="{StaticResource ShadowTextBox}" PreviewTextInput="TactValidation"/>
+                     
+                     />
 
 
             <Button Grid.Row="0" 

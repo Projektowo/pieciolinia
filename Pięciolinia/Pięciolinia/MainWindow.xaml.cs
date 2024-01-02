@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -30,6 +32,9 @@ namespace Pięciolinia
 
             //wybranie pierwszego elementu
             SelectElement(elementInfoList[0].Element);
+
+            // auto focus textboxa
+            inputTextBox.Focus();
         }
 
         //inicjalizowanie elementów/nut dodając je do tablicy
@@ -74,22 +79,116 @@ namespace Pięciolinia
         //przycisk do dodawania taktów
         private void AddColumnButton_Click(object sender, RoutedEventArgs e)
         {
-            AddColumnToGrid();
+            //AddColumnsToGrid(4); // 4 jak tempo to np 4/X
+
+           // pobranie danych z textboxa
+            string userInput = inputTextBox.Text;
+            ProcessUserInput(userInput);
+            
+
         }
 
 
-        //póki co jest tylko jedna kolumna zamiast całego taktu
-        private void AddColumnToGrid()
+        private void ProcessUserInput(string userInput)
         {
-            ColumnDefinition columnDefinition = new ColumnDefinition();
-            mainGrid.ColumnDefinitions.Add(columnDefinition);
+            // podział cyfr
+            string[] inputParts = userInput.Split('/');
 
-            //przycisk do wizualizacji czegokolwiek
-            Button newButton = new Button();
-            newButton.Content = "New Button";
-            Grid.SetColumn(newButton, mainGrid.ColumnDefinitions.Count - 1);
-            mainGrid.Children.Add(newButton);
+            if (inputParts.Length == 2)
+            {
+                // pierwsza cyfra
+                if (int.TryParse(inputParts[0], out int columnCount))
+                {
+                    if (columnCount <= 0)
+                    {
+                        MessageBox.Show("Number of columns must be greater than zero.");
+                        return;
+                    }
+
+                    // druga cyfra
+                    if (int.TryParse(inputParts[1], out int imageIndex))
+                    {
+                        if (imageIndex <= 0)
+                        {
+                            MessageBox.Show("Image index must be greater than zero.");
+                            return;
+                        }
+
+                        // sprawdzenie czy nie wykracza poza ilość nut
+                        if (imageIndex > 5)
+                        {
+                            MessageBox.Show($"Nie ma tylu nut bruh.");
+                            return;
+                        }
+
+                        // jak wszystko buja, to zwraca zmienne
+                        AddColumnsToGrid(columnCount, imageIndex-1);
+
+                        // wyłączenie textboxa
+                        inputTextBox.IsEnabled = false;
+                        inputTextBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#212121"));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nieprawidłowy rodzaj nuty. Proszę wprowadź poprawny numer.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nieprawidłowy tempo. Proszę wprowadź poprawny numer.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("nieprawidłowy format. proszę wprowadź poprawne dane w postaci 'X/Y'.");
+            }
         }
+
+        // mięso dodawania taktu
+        private void AddColumnsToGrid(int columnCount, int imageIndex)
+        {
+            for (int i = 0; i < columnCount; i++)
+            {
+                ColumnDefinition columnDefinition = new ColumnDefinition();
+                mainGrid.ColumnDefinitions.Add(columnDefinition);
+
+                // tworzenie elementu ze zdjęciem
+                Image newImage = new Image();
+                newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(sharedImagePaths[0], UriKind.RelativeOrAbsolute)); // Use the first image path as default
+                Grid.SetColumn(newImage, mainGrid.ColumnDefinitions.Count - 1);
+
+                // tworzenie tego w określonym wierszu grida
+                Grid.SetRow(newImage, 6); // jako że to indexy, to 5 tak naprawdę jest szóstką
+                mainGrid.Children.Add(newImage);
+
+                // przypisanie wartości do elementu
+                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6 };
+                elementInfoList.Add(newElementInfo);
+
+                // zwiększanie indexu pozycji
+                newElementInfo.CurrentImageIndex = (newElementInfo.CurrentImageIndex + 1) % newElementInfo.ImagePaths.Length;
+                newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(newElementInfo.ImagePaths[newElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
+            }
+
+            // ustawienie indexu grafiki
+            foreach (var info in elementInfoList.Skip(elementInfoList.Count - columnCount))
+            {
+                info.CurrentImageIndex = imageIndex % info.ImagePaths.Length;
+
+                // sprawdzenie czy element ma sourca
+                if (info.Element is Image imageElement)
+                {
+                    imageElement.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(info.ImagePaths[info.CurrentImageIndex], UriKind.RelativeOrAbsolute));
+                }
+            }
+
+            // wybranie pierwszego elementu z dodanego taktu
+            if (elementInfoList.Count >= columnCount)
+            {
+                SelectElement(elementInfoList[elementInfoList.Count - columnCount].Element);
+            }
+        }
+        
 
         // podmiana grafiki danego elementu
         private void ChangeImage(int direction)
@@ -223,7 +322,9 @@ namespace Pięciolinia
         //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠟⠀⠀⠀⠸⠇
         //
         //
-        //https://www.youtube.com/watch?v=Zttt_rv87no⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        //https://www.youtube.com/watch?v=Zttt_rv87no⠀⠀⠀⠀⠀⠀
+        // bruh
+        // https://www.youtube.com/watch?v=Z3J_MCbwaJ0
         private void TactValidation(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9/]+");
