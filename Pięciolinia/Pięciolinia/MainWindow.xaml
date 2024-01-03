@@ -94,7 +94,7 @@
                      VerticalContentAlignment="Center"
                      Style="{StaticResource DarkTextBoxStyle}"
                      x:Name="inputTextBox"
-                     MaxLength="5"
+                     MaxLength="5" TextChanged="inputTextBox_TextChanged"
                      
                      />
 

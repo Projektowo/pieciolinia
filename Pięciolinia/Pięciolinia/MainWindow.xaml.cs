@@ -21,6 +21,9 @@ namespace Pięciolinia
         // lista z danymi dla każdej nuty
         private List<ElementInfo> elementInfoList;
 
+        // zmienna blokujaca mozliwosc poruszania nutami, kiedy żaden takt nie istnieje
+        private bool tactControl = false;
+
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
@@ -123,6 +126,7 @@ namespace Pięciolinia
                         }
 
                         // jak wszystko buja, to zwraca zmienne
+                        tactControl = true;
                         AddColumnsToGrid(columnCount, imageIndex-1);
 
                         // wyłączenie textboxa
@@ -239,51 +243,54 @@ namespace Pięciolinia
         //logika strzałek/klawiszy
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.Key)
+            if (tactControl)
             {
-                case Key.A:
-                    // wybierz element do lewej
-                    int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                    int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
-                    SelectElement(elementInfoList[newIndex].Element);
-                    break;
+                switch (e.Key)
+                {
+                    case Key.A:
+                        // wybierz element do lewej
+                        int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
+                        int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
+                        SelectElement(elementInfoList[newIndex].Element);
+                        break;
 
-                case Key.D:
-                    // wybierz element do prawej
-                    currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                    newIndex = (currentIndex + 1) % elementInfoList.Count;
-                    SelectElement(elementInfoList[newIndex].Element);
-                    break;
+                    case Key.D:
+                        // wybierz element do prawej
+                        currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
+                        newIndex = (currentIndex + 1) % elementInfoList.Count;
+                        SelectElement(elementInfoList[newIndex].Element);
+                        break;
 
-                case Key.W:
-                    //przesunięcie nuty wyżej
-                    if (Grid.GetRow(selectedElement) - 1 != -1)
-                    {
-                        Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
-                        ChangeUpDownValue(1);
-                    }
-                    break;
+                    case Key.W:
+                        //przesunięcie nuty wyżej
+                        if (Grid.GetRow(selectedElement) - 1 != -1)
+                        {
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                            ChangeUpDownValue(1);
+                        }
+                        break;
 
-                case Key.S:
-                    //przesunięcie nuty niżej
-                    if (Grid.GetRow(selectedElement) - 1 != 11)
-                    {
-                        Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
-                        ChangeUpDownValue(-1);
-                    }
-                    break;
-                      
-                case Key.E:
-                case Key.OemPlus:
-                    // zwiększenie indexu obrazu o jeden
-                    ChangeImage(1);
-                    break;
+                    case Key.S:
+                        //przesunięcie nuty niżej
+                        if (Grid.GetRow(selectedElement) - 1 != 11)
+                        {
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                            ChangeUpDownValue(-1);
+                        }
+                        break;
 
-                case Key.Q:
-                case Key.OemMinus:
-                    // zmniejszenie indexu obrazu o jeden
-                    ChangeImage(-1);
-                    break;
+                    case Key.E:
+                    case Key.OemPlus:
+                        // zwiększenie indexu obrazu o jeden
+                        ChangeImage(1);
+                        break;
+
+                    case Key.Q:
+                    case Key.OemMinus:
+                        // zmniejszenie indexu obrazu o jeden
+                        ChangeImage(-1);
+                        break;
+                }
             }
         }
 
@@ -323,14 +330,20 @@ namespace Pięciolinia
         //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠟⠀⠀⠀⠸⠇
         //
         //
-        //https://www.youtube.com/watch?v=Zttt_rv87no⠀⠀⠀⠀⠀⠀
+        // https://www.youtube.com/watch?v=Zttt_rv87no⠀⠀⠀⠀⠀⠀
         // bruh
         // https://www.youtube.com/watch?v=Z3J_MCbwaJ0
+        // bruh
+        // https://www.youtube.com/watch?v=AINfHRXx1kQ
         private void TactValidation(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9/]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
