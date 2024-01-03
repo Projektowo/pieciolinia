@@ -225,7 +225,7 @@ namespace Pięciolinia
                 selectedElementInfo.UpDownValue += direction;
 
                 // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
-                //MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
+                MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
             }
         }
 
@@ -272,7 +272,7 @@ namespace Pięciolinia
 
                     case Key.S:
                         //przesunięcie nuty niżej
-                        if (Grid.GetRow(selectedElement) - 1 != 11)
+                        if (Grid.GetRow(selectedElement) - 1 != 10)
                         {
                             Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
                             ChangeUpDownValue(-1);
