@@ -27,6 +27,9 @@ namespace Pięciolinia
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
+        //tablica przechowująca literowy odpowiednik nut/pauz (jeszcze nie dziala)
+        private char[] noteType = { 'A', 'B', 'C', 'D', 'E' };
+
         public MainWindow()
         {
             //inizjalizacja
@@ -167,7 +170,7 @@ namespace Pięciolinia
                 mainGrid.Children.Add(newImage);
 
                 // przypisanie wartości do elementu
-                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6 };
+                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6, Type = 'A'};
                 elementInfoList.Add(newElementInfo);
 
                 // zwiększanie indexu pozycji
@@ -210,6 +213,9 @@ namespace Pięciolinia
                 {
                     // podmiana grafiki na adekwatną
                     image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(selectedElementInfo.ImagePaths[selectedElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
+
+                    if (direction > 0) selectedElementInfo.Type++; //TO DO Zmiana typu nuty która działa, to jest sam koncept jak narazie
+                    if (direction < 0) selectedElementInfo.Type--;
                 }
             }
         }
@@ -224,8 +230,11 @@ namespace Pięciolinia
                 // zmiana wartości zmiennej mówiącej o pozycji na pięciolini (góra/dół)
                 selectedElementInfo.UpDownValue += direction;
 
+                int selectedElementRow = selectedElementInfo.UpDownValue;
+                char selectedElementType = selectedElementInfo.Type;
+
                 // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
-                MessageBox.Show($"Up/Down value for the selected element: {selectedElementInfo.UpDownValue}");
+                Console.WriteLine($"{selectedElementType}{selectedElementRow}");
             }
         }
 
@@ -237,6 +246,7 @@ namespace Pięciolinia
             public string[] ImagePaths { get; set; }
             public int CurrentImageIndex { get; set; }
             public int UpDownValue { get; set; }
+            public char Type { get; set; }
         }
 
 
