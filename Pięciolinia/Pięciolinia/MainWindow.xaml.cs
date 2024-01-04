@@ -189,6 +189,17 @@ namespace Pięciolinia
                 }
             }
 
+
+            // WEIRD STUFF - wybranie każdego elementu i przesunięcie go o 1 + i -, żeby zaktualizować typ nuty
+            int x = 0;
+            foreach(var ele in elementInfoList)
+            {
+                SelectElement(elementInfoList[x].Element);
+                x++;
+                ChangeImage(1);
+                ChangeImage(-1);
+            }
+
             // wybranie pierwszego elementu z dodanego taktu
             if (elementInfoList.Count >= columnCount)
             {
@@ -240,7 +251,6 @@ namespace Pięciolinia
         {
             public UIElement Element { get; set; }
             public string[] ImagePaths { get; set; }
-            public char[] NoteTypes {  get; set; }
             public int CurrentImageIndex { get; set; }
             public int UpDownValue { get; set; }
             public char CurrentType { get; set; }
@@ -351,6 +361,14 @@ namespace Pięciolinia
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void clearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            inputTextBox.Text = "";
+            inputTextBox.IsEnabled = true;
+            mainGrid.Children.Clear();
+            tactControl = false;
         }
     }
 }

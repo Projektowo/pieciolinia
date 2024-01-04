@@ -94,7 +94,7 @@
                      VerticalContentAlignment="Center"
                      Style="{StaticResource DarkTextBoxStyle}"
                      x:Name="inputTextBox"
-                     MaxLength="5" TextChanged="inputTextBox_TextChanged"
+                     MaxLength="5" TextChanged="inputTextBox_TextChanged" Text=""
                      
                      />
 
@@ -102,7 +102,7 @@
             <Button Grid.Row="0" 
                     Grid.Column="4"
                     Grid.ColumnSpan="2"
-                    Content="PLAY"
+                    Content="START"
                     Style="{StaticResource ButtonTheme}"/>
 
             <Button Grid.Row="0" 
@@ -131,11 +131,11 @@
                     Content="Wczytaj"
                     Style="{StaticResource ButtonTheme}"/>
 
-            <Button Grid.Row="3" 
+            <Button x:Name="clearBtn" Grid.Row="3" 
                     Grid.Column="6"
                     Grid.ColumnSpan="2"
                     Content="Wyczyść"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}" Click="clearBtn_Click"/>
 
 
         </Grid>

@@ -35,7 +35,7 @@
                                 <!-- Actual TextBox Content -->
                                 <ScrollViewer x:Name="PART_ContentHost"/>
                                 <!-- Watermark TextBlock -->
-                                <TextBlock Text="Enter tact"
+                                <TextBlock Text="Wprowadź takt"
                                            Margin="5,0,0,0"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
