@@ -27,8 +27,6 @@ namespace Pięciolinia
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
-        //tablica przechowująca literowy odpowiednik nut/pauz (jeszcze nie dziala)
-        private char[] noteType = { 'A', 'B', 'C', 'D', 'E' };
 
         public MainWindow()
         {
@@ -170,11 +168,12 @@ namespace Pięciolinia
                 mainGrid.Children.Add(newImage);
 
                 // przypisanie wartości do elementu
-                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6, Type = 'A'};
+                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6};
                 elementInfoList.Add(newElementInfo);
 
                 // zwiększanie indexu pozycji
                 newElementInfo.CurrentImageIndex = (newElementInfo.CurrentImageIndex + 1) % newElementInfo.ImagePaths.Length;
+                newElementInfo.CurrentType = (char)(newElementInfo.CurrentImageIndex - 1 + 97);
                 newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(newElementInfo.ImagePaths[newElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
             }
 
@@ -208,14 +207,11 @@ namespace Pięciolinia
             {
                 // wyciągnięcie indexu aktualnej grafiki elementu
                 selectedElementInfo.CurrentImageIndex = (selectedElementInfo.CurrentImageIndex + direction + selectedElementInfo.ImagePaths.Length) % selectedElementInfo.ImagePaths.Length;
-
+                selectedElementInfo.CurrentType = (char)(selectedElementInfo.CurrentImageIndex + 97);
                 if (selectedElement is Image image)
                 {
                     // podmiana grafiki na adekwatną
                     image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(selectedElementInfo.ImagePaths[selectedElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
-
-                    if (direction > 0) selectedElementInfo.Type++; //TO DO Zmiana typu nuty która działa, to jest sam koncept jak narazie
-                    if (direction < 0) selectedElementInfo.Type--;
                 }
             }
         }
@@ -231,7 +227,7 @@ namespace Pięciolinia
                 selectedElementInfo.UpDownValue += direction;
 
                 int selectedElementRow = selectedElementInfo.UpDownValue;
-                char selectedElementType = selectedElementInfo.Type;
+                char selectedElementType = selectedElementInfo.CurrentType;
 
                 // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
                 Console.WriteLine($"{selectedElementType}{selectedElementRow}");
@@ -244,9 +240,10 @@ namespace Pięciolinia
         {
             public UIElement Element { get; set; }
             public string[] ImagePaths { get; set; }
+            public char[] NoteTypes {  get; set; }
             public int CurrentImageIndex { get; set; }
             public int UpDownValue { get; set; }
-            public char Type { get; set; }
+            public char CurrentType { get; set; }
         }
 
 
