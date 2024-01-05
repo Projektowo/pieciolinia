@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
@@ -241,8 +243,36 @@ namespace Pięciolinia
                 char selectedElementType = selectedElementInfo.CurrentType;
 
                 // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
-                Console.WriteLine($"{selectedElementType}{selectedElementRow}");
+                //Console.WriteLine($"{selectedElementType}{selectedElementRow}");
             }
+        }
+
+        private void SaveToTxt()
+        {
+            string data = $"{inputTextBox.Text}\n";
+
+            foreach (var ele in elementInfoList)
+            {
+                data += $"{ele.CurrentType}{ele.UpDownValue}\n";
+            }
+
+            //Console.WriteLine(data);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, data);
+        }
+
+        private void LoadFromTxt() // <--- TODO
+        {
+            // Read a file
+            //string readText = File.ReadAllText(fullPath);
+            //Console.WriteLine(readText);
         }
 
 
@@ -369,6 +399,14 @@ namespace Pięciolinia
             inputTextBox.IsEnabled = true;
             mainGrid.Children.Clear();
             tactControl = false;
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (tactControl)
+            {
+                SaveToTxt();
+            }
         }
     }
 }

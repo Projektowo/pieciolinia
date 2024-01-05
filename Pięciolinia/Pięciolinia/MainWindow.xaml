@@ -112,11 +112,11 @@
                     Style="{StaticResource ButtonTheme}"/>
 
 
-            <Button Grid.Row="3" 
+            <Button x:Name="SaveBtn" Grid.Row="3" 
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Content="Zapisz"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}" Click="saveBtn_Click"/>
 
 
             <Button Grid.Row="3" 
