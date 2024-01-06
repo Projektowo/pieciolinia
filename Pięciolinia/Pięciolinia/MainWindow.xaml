@@ -125,11 +125,11 @@
                     Content="Eksportuj"
                     Style="{StaticResource ButtonTheme}"/>
 
-            <Button Grid.Row="3" 
+            <Button x:Name="loadBtn" Grid.Row="3" 
                     Grid.Column="4"
                     Grid.ColumnSpan="2"
                     Content="Wczytaj"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}" Click="loadBtn_Click"/>
 
             <Button x:Name="clearBtn" Grid.Row="3" 
                     Grid.Column="6"

@@ -18,7 +18,7 @@ namespace Pięciolinia
     {
 
         //elementy które są nutami
-        private UIElement selectedElement; 
+        private UIElement selectedElement;
 
         // lista z danymi dla każdej nuty
         private List<ElementInfo> elementInfoList;
@@ -35,7 +35,7 @@ namespace Pięciolinia
             //inizjalizacja
             InitializeComponent();
             InitializeElements();
-           
+
 
             //wybranie pierwszego elementu
             //SelectElement(elementInfoList[0].Element);
@@ -77,7 +77,7 @@ namespace Pięciolinia
 
             // wybranie nowego elementu
             selectedElement = element;
- 
+
             // znowu wizualne bzdety
             // Todo: dowiedziec sie w jaki sposob implementuje sie rzeczy typu Effects, bo internet nie wie
         }
@@ -88,10 +88,10 @@ namespace Pięciolinia
         {
             //AddColumnsToGrid(4); // 4 jak tempo to np 4/X
 
-           // pobranie danych z textboxa
+            // pobranie danych z textboxa
             string userInput = inputTextBox.Text;
             ProcessUserInput(userInput);
-            
+
 
         }
 
@@ -130,7 +130,7 @@ namespace Pięciolinia
 
                         // jak wszystko buja, to zwraca zmienne
                         tactControl = true;
-                        AddColumnsToGrid(columnCount, imageIndex-1);
+                        AddColumnsToGrid(columnCount, imageIndex - 1);
 
                         // wyłączenie textboxa
                         inputTextBox.IsEnabled = false;
@@ -170,7 +170,7 @@ namespace Pięciolinia
                 mainGrid.Children.Add(newImage);
 
                 // przypisanie wartości do elementu
-                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6};
+                ElementInfo newElementInfo = new ElementInfo { Element = newImage, ImagePaths = sharedImagePaths, CurrentImageIndex = 0, UpDownValue = 6 };
                 elementInfoList.Add(newElementInfo);
 
                 // zwiększanie indexu pozycji
@@ -194,7 +194,7 @@ namespace Pięciolinia
 
             // WEIRD STUFF - wybranie każdego elementu i przesunięcie go o 1 + i -, żeby zaktualizować typ nuty
             int x = 0;
-            foreach(var ele in elementInfoList)
+            foreach (var ele in elementInfoList)
             {
                 SelectElement(elementInfoList[x].Element);
                 x++;
@@ -208,7 +208,7 @@ namespace Pięciolinia
                 SelectElement(elementInfoList[elementInfoList.Count - columnCount].Element);
             }
         }
-        
+
 
         // podmiana grafiki danego elementu
         private void ChangeImage(int direction)
@@ -241,14 +241,43 @@ namespace Pięciolinia
 
                 int selectedElementRow = selectedElementInfo.UpDownValue;
                 char selectedElementType = selectedElementInfo.CurrentType;
-
-                // potencjalne dostanie się do pozycji danej nuty na pięciolini (work in progress)
                 //Console.WriteLine($"{selectedElementType}{selectedElementRow}");
             }
         }
 
+        private int GetNoteIntValue(char note)
+        {
+            int value = 0;
+
+            switch (note)
+            {
+                case 'a':
+                    value = 1;
+                    break;
+
+                case 'b':
+                    value = 2;
+                    break;
+
+                case 'c':
+                    value = 3;
+                    break;
+
+                case 'd':
+                    value = 4;
+                    break;
+
+                case 'e':
+                    value = 5;
+                    break;
+            }
+
+            return value;
+        }
+
         private void SaveToTxt()
         {
+            //Pobieranie wszystkich danych
             string data = $"{inputTextBox.Text}\n";
 
             foreach (var ele in elementInfoList)
@@ -258,6 +287,7 @@ namespace Pięciolinia
 
             //Console.WriteLine(data);
 
+            //Zapisanie danych przy pomocy SaveFileDialog
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "Text file (*.txt)|*.txt",
@@ -268,11 +298,83 @@ namespace Pięciolinia
                 File.WriteAllText(saveFileDialog.FileName, data);
         }
 
-        private void LoadFromTxt() // <--- TODO
+        private void LoadFromTxt()
         {
-            // Read a file
-            //string readText = File.ReadAllText(fullPath);
-            //Console.WriteLine(readText);
+            //Odczytanie danych przy pomocy OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Clear();
+
+                var fileStream = openFileDialog.OpenFile();
+                string loadedTact = "";
+                string loadedNotes = "";
+
+
+                bool catchTact = true;
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    if (catchTact)
+                    {
+                        loadedTact = reader.ReadLine();
+                        catchTact = false;
+                    }
+                    loadedNotes = reader.ReadToEnd();
+                }
+
+                //Console.WriteLine(loadedTact);
+                //Console.WriteLine(loadedNotes);
+
+                //Emuluje reczne dodanie taktu przez uzytkownika
+                inputTextBox.Text = loadedTact;
+                ProcessUserInput(loadedTact);
+
+                //Zapamietac - co trzeci element loadedNotes to \n
+
+                var numberOfNotes = loadedNotes.Length / 3;
+                //Console.WriteLine(loadedNotes);
+                //Console.WriteLine(numberOfNotes);
+
+                //6 - startowa lokacja nuty
+                for (int i = 0; i < numberOfNotes; i++)
+                {
+                    SelectElement(elementInfoList[i].Element);
+                    int tempNoteVal = GetNoteIntValue(loadedNotes[3 * i]);
+                    int tempUpDown = loadedNotes[3 * i + 1];
+                    int trueTact = loadedTact[2]; 
+
+                    /* nie dziala :(
+                    while (tempNoteVal > trueTact)
+                    {
+                        ChangeImage(-1);
+                        tempNoteVal--;
+                    }
+                    while (tempNoteVal < trueTact)
+                    {
+                        ChangeImage(1);
+                        tempNoteVal++;
+                    }
+
+                    while (tempUpDown > trueTact)
+                    {
+                        ChangeImage(-1);
+                        ChangeUpDownValue(-1);
+                    }
+                    while (tempUpDown < trueTact)
+                    {
+                        ChangeImage(1);
+                        ChangeUpDownValue(1);
+                    }
+                    */
+                }
+            }
+
+            if (!tactControl) tactControl = true;
         }
 
 
@@ -388,6 +490,14 @@ namespace Pięciolinia
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void Clear()
+        {
+            inputTextBox.Text = "";
+            inputTextBox.IsEnabled = true;
+            mainGrid.Children.Clear();
+            mainGrid.ColumnDefinitions.Clear();
+            tactControl = false;
+        }
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -395,10 +505,7 @@ namespace Pięciolinia
 
         private void clearBtn_Click(object sender, RoutedEventArgs e)
         {
-            inputTextBox.Text = "";
-            inputTextBox.IsEnabled = true;
-            mainGrid.Children.Clear();
-            tactControl = false;
+            Clear();
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
@@ -407,6 +514,11 @@ namespace Pięciolinia
             {
                 SaveToTxt();
             }
+        }
+
+        private void loadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadFromTxt();
         }
     }
 }
