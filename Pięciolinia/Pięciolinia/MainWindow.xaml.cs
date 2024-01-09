@@ -29,7 +29,6 @@ namespace Pięciolinia
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
-
         public MainWindow()
         {
             //inizjalizacja
@@ -496,6 +495,10 @@ namespace Pięciolinia
             inputTextBox.IsEnabled = true;
             mainGrid.Children.Clear();
             mainGrid.ColumnDefinitions.Clear();
+
+            ColumnDefinition columnDefinition = new ColumnDefinition();
+            mainGrid.ColumnDefinitions.Add(columnDefinition);
+
             tactControl = false;
         }
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
