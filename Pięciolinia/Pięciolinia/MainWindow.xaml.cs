@@ -326,8 +326,8 @@ namespace Pięciolinia
                     loadedNotes = reader.ReadToEnd();
                 }
 
-                //Console.WriteLine(loadedTact);
-                //Console.WriteLine(loadedNotes);
+                Console.WriteLine(loadedTact);
+                Console.WriteLine(loadedNotes);
 
                 //Emuluje reczne dodanie taktu przez uzytkownika
                 inputTextBox.Text = loadedTact;
@@ -336,41 +336,60 @@ namespace Pięciolinia
                 //Zapamietac - co trzeci element loadedNotes to \n
 
                 var numberOfNotes = loadedNotes.Length / 3;
-                //Console.WriteLine(loadedNotes);
-                //Console.WriteLine(numberOfNotes);
+                Console.WriteLine(loadedNotes);
+                Console.WriteLine(numberOfNotes);
 
                 //6 - startowa lokacja nuty
+               
                 for (int i = 0; i < numberOfNotes; i++)
                 {
                     SelectElement(elementInfoList[i].Element);
                     int tempNoteVal = GetNoteIntValue(loadedNotes[3 * i]);
-                    int tempUpDown = loadedNotes[3 * i + 1];
-                    int trueTact = loadedTact[2]; 
+                    int tempUpDown = (int)char.GetNumericValue(loadedNotes[3 * i + 1]); // Konwersja z char na int
+                    int trueTact = (int)char.GetNumericValue(loadedTact[2]);
+                    Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
 
-                    /* nie dziala :(
                     while (tempNoteVal > trueTact)
                     {
                         ChangeImage(-1);
                         tempNoteVal--;
+                        Console.WriteLine("1 loop");
                     }
                     while (tempNoteVal < trueTact)
                     {
                         ChangeImage(1);
                         tempNoteVal++;
+                        Console.WriteLine("2 loop");
                     }
 
-                    while (tempUpDown > trueTact)
+                    while (tempUpDown > 6)
                     {
-                        ChangeImage(-1);
-                        ChangeUpDownValue(-1);
+                        if (Grid.GetRow(selectedElement) - 1 != 10)
+                        {
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                            ChangeUpDownValue(-1);
+                        }
+                        tempUpDown--;
+
+                        Console.WriteLine("3 loop");
                     }
-                    while (tempUpDown < trueTact)
+
+                    while (tempUpDown < 6)
                     {
-                        ChangeImage(1);
-                        ChangeUpDownValue(1);
+                        if (Grid.GetRow(selectedElement) - 1 != -1)
+                        {
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                            ChangeUpDownValue(1);
+                           
+                        }
+                        tempUpDown++;
+                        Console.WriteLine("4 loop");
                     }
-                    */
+
+                    Console.WriteLine("Done");
+
                 }
+               
             }
 
             if (!tactControl) tactControl = true;
