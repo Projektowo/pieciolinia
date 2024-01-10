@@ -347,27 +347,28 @@ namespace Pięciolinia
                     int tempNoteVal = GetNoteIntValue(loadedNotes[3 * i]);
                     int tempUpDown = (int)char.GetNumericValue(loadedNotes[3 * i + 1]); // Konwersja z char na int
                     int trueTact = (int)char.GetNumericValue(loadedTact[2]);
+                    Console.WriteLine($"{loadedNotes[3 * i]} {loadedNotes[3 * i + 1]} {loadedTact[2]}");
                     Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
 
                     while (tempNoteVal > trueTact)
                     {
-                        ChangeImage(-1);
+                        ChangeImage(1);
                         tempNoteVal--;
                         Console.WriteLine("1 loop");
                     }
                     while (tempNoteVal < trueTact)
                     {
-                        ChangeImage(1);
+                        ChangeImage(-1);
                         tempNoteVal++;
                         Console.WriteLine("2 loop");
                     }
 
                     while (tempUpDown > 6)
                     {
-                        if (Grid.GetRow(selectedElement) - 1 != 10)
+                        if (Grid.GetRow(selectedElement) - 1 != -1)
                         {
-                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
-                            ChangeUpDownValue(-1);
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
+                            ChangeUpDownValue(1);
                         }
                         tempUpDown--;
 
@@ -376,10 +377,10 @@ namespace Pięciolinia
 
                     while (tempUpDown < 6)
                     {
-                        if (Grid.GetRow(selectedElement) - 1 != -1)
+                        if (Grid.GetRow(selectedElement) - 1 != 10)
                         {
-                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) - 1);
-                            ChangeUpDownValue(1);
+                            Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
+                            ChangeUpDownValue(-1);
                            
                         }
                         tempUpDown++;
