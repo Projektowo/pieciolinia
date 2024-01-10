@@ -326,8 +326,8 @@ namespace Pięciolinia
                     loadedNotes = reader.ReadToEnd();
                 }
 
-                Console.WriteLine(loadedTact);
-                Console.WriteLine(loadedNotes);
+                //Console.WriteLine(loadedTact);
+                //Console.WriteLine(loadedNotes);
 
                 //Emuluje reczne dodanie taktu przez uzytkownika
                 inputTextBox.Text = loadedTact;
@@ -336,8 +336,18 @@ namespace Pięciolinia
                 //Zapamietac - co trzeci element loadedNotes to \n
 
                 var numberOfNotes = loadedNotes.Length / 3;
-                Console.WriteLine(loadedNotes);
-                Console.WriteLine(numberOfNotes);
+                //Console.WriteLine(loadedNotes);
+                //Console.WriteLine(loadedTact[0]); <- ilosc nut na jeden takt
+
+                //Dodawanie kolejnych taktow jesli jest wiecej niz 1
+                int tempNoN = numberOfNotes;
+                int NotesOnTact = (int)char.GetNumericValue(loadedTact[0]);
+
+                while (tempNoN > NotesOnTact)
+                {
+                    ProcessUserInput(loadedTact);
+                    tempNoN -= NotesOnTact;
+                }
 
                 //6 - startowa lokacja nuty
                
@@ -347,22 +357,22 @@ namespace Pięciolinia
                     int tempNoteVal = GetNoteIntValue(loadedNotes[3 * i]);
                     int tempUpDown = (int)char.GetNumericValue(loadedNotes[3 * i + 1]); // Konwersja z char na int
                     int trueTact = (int)char.GetNumericValue(loadedTact[2]);
-                    Console.WriteLine($"{loadedNotes[3 * i]} {loadedNotes[3 * i + 1]} {loadedTact[2]}");
-                    Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
+                    //Console.WriteLine($"{loadedNotes[3 * i]} {loadedNotes[3 * i + 1]} {loadedTact[2]}");
+                    //Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
 
+                    //Zmiana typu nuty
                     while (tempNoteVal > trueTact)
                     {
                         ChangeImage(1);
                         tempNoteVal--;
-                        Console.WriteLine("1 loop");
                     }
                     while (tempNoteVal < trueTact)
                     {
                         ChangeImage(-1);
                         tempNoteVal++;
-                        Console.WriteLine("2 loop");
                     }
 
+                    //Zmiana pozycji nuty
                     while (tempUpDown > 6)
                     {
                         if (Grid.GetRow(selectedElement) - 1 != -1)
@@ -371,8 +381,6 @@ namespace Pięciolinia
                             ChangeUpDownValue(1);
                         }
                         tempUpDown--;
-
-                        Console.WriteLine("3 loop");
                     }
 
                     while (tempUpDown < 6)
@@ -384,10 +392,7 @@ namespace Pięciolinia
                            
                         }
                         tempUpDown++;
-                        Console.WriteLine("4 loop");
                     }
-
-                    Console.WriteLine("Done");
 
                 }
                
