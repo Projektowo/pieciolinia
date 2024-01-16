@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Media;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -575,18 +577,11 @@ namespace Pięciolinia
                 foreach (var note in elementInfoList)
                 {
                     PlayAudio($"{AppDomain.CurrentDomain.BaseDirectory}sounds\\{note.CurrentType.ToString().ToUpper()}{note.UpDownValue}.wav");
+                    System.Threading.Thread.Sleep(3000);
                 }
                 isPlaying = false;
                 Console.WriteLine(elementInfoList);
 
-            }
-        }
-
-        static void PlaySequentially(List<string> mp3Files)
-        {
-            foreach (string fileName in mp3Files)
-            {
-                PlayAudio(fileName);
             }
         }
 
@@ -596,9 +591,9 @@ namespace Pięciolinia
             {
                 Console.WriteLine($"Playing: {fileName} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
                 player.PlaySync(); // Use Play() for asynchronous playback
+                
                 Console.WriteLine($"Finished playing: {fileName}  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
             }
         }
-
     }
 }
