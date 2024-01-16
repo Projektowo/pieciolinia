@@ -528,7 +528,7 @@ namespace Pięciolinia
 
             ColumnDefinition columnDefinition = new ColumnDefinition();
             mainGrid.ColumnDefinitions.Add(columnDefinition);
-
+            elementInfoList.Clear();
             tactControl = false;
         }
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -577,11 +577,36 @@ namespace Pięciolinia
                 foreach (var note in elementInfoList)
                 {
                     PlayAudio($"{AppDomain.CurrentDomain.BaseDirectory}sounds\\{note.CurrentType.ToString().ToUpper()}{note.UpDownValue}.wav");
-                    System.Threading.Thread.Sleep(3000);
+                    System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
+                    
                 }
                 isPlaying = false;
                 Console.WriteLine(elementInfoList);
 
+            }
+        }
+
+        private int getDelayForNoteType(char currentType)
+        {
+            if(currentType == 'a')
+            {
+                return 3000;
+            }
+            else if(currentType == 'b')
+            {
+                return 3000;
+            }
+            else if (currentType == 'c')
+            {
+                return 3000;
+            }
+            else if (currentType == 'd')
+            {
+                return 3000;
+            }
+            else
+            {
+                return 3000;
             }
         }
 
@@ -596,4 +621,6 @@ namespace Pięciolinia
             }
         }
     }
+
+    
 }
