@@ -528,7 +528,7 @@ namespace Pięciolinia
 
             ColumnDefinition columnDefinition = new ColumnDefinition();
             mainGrid.ColumnDefinitions.Add(columnDefinition);
-
+            elementInfoList.Clear();
             tactControl = false;
         }
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
