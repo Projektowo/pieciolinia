@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,8 @@ namespace Pięciolinia
 
         // zmienna blokujaca mozliwosc poruszania nutami, kiedy żaden takt nie istnieje
         private bool tactControl = false;
+
+        private bool isPlaying = false;
 
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
@@ -548,5 +551,54 @@ namespace Pięciolinia
         {
             LoadFromTxt();
         }
+
+        private void startBtn_Click(object sender, RoutedEventArgs e)
+        {
+            start_Btn_Click();
+        }
+
+        private void stopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (isPlaying)
+            {
+                isPlaying = false;
+                Console.WriteLine(elementInfoList);
+            }
+        }
+
+        private void start_Btn_Click()
+        {
+            if (!isPlaying)
+            {
+                isPlaying = true;
+                Console.WriteLine(elementInfoList.Count);
+                foreach (var note in elementInfoList)
+                {
+                    PlayAudio($"{AppDomain.CurrentDomain.BaseDirectory}sounds\\{note.CurrentType.ToString().ToUpper()}{note.UpDownValue}.wav");
+                }
+                isPlaying = false;
+                Console.WriteLine(elementInfoList);
+
+            }
+        }
+
+        static void PlaySequentially(List<string> mp3Files)
+        {
+            foreach (string fileName in mp3Files)
+            {
+                PlayAudio(fileName);
+            }
+        }
+
+        static void PlayAudio(string fileName)
+        {
+            using (SoundPlayer player = new SoundPlayer(fileName))
+            {
+                Console.WriteLine($"Playing: {fileName} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+                player.PlaySync(); // Use Play() for asynchronous playback
+                Console.WriteLine($"Finished playing: {fileName}  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+            }
+        }
+
     }
 }

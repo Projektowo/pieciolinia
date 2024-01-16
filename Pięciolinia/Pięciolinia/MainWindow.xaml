@@ -99,17 +99,21 @@
                      />
 
 
-            <Button Grid.Row="0" 
+            <Button x:Name="startBtn"
+                    Grid.Row="0" 
                     Grid.Column="4"
                     Grid.ColumnSpan="2"
                     Content="START"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}"
+                    Click="startBtn_Click" />
 
-            <Button Grid.Row="0" 
+            <Button x:Name="stopBtn"
+                    Grid.Row="0" 
                     Grid.Column="6"
                     Grid.ColumnSpan="2"
                     Content="STOP"
-                    Style="{StaticResource ButtonTheme}"/>
+                    Style="{StaticResource ButtonTheme}"
+                    Click="stopBtn_Click" />
 
 
             <Button x:Name="SaveBtn" Grid.Row="3" 
