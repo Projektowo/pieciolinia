@@ -109,6 +109,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Debug\sounds\" />
     <Folder Include="Fonts\" />
     <Folder Include="MVVM\Model\" />
     <Folder Include="MVVM\ViewModel\" />
@@ -118,6 +119,18 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Resources\n2.wav" />
+    <EmbeddedResource Include="Resources\n1.wav" />
+    <EmbeddedResource Include="Resources\n13.wav" />
+    <EmbeddedResource Include="Resources\n12.wav" />
+    <EmbeddedResource Include="Resources\n11.wav" />
+    <EmbeddedResource Include="Resources\n10.wav" />
+    <EmbeddedResource Include="Resources\n8.wav" />
+    <EmbeddedResource Include="Resources\n7.wav" />
+    <EmbeddedResource Include="Resources\n6.wav" />
+    <EmbeddedResource Include="Resources\n5.wav" />
+    <EmbeddedResource Include="Resources\n4.wav" />
+    <EmbeddedResource Include="Resources\n3.wav" />
     <Resource Include="Images\szesnastkapodwojna.png" />
     <Resource Include="Images\osemkapodwojna.png" />
     <Resource Include="Images\polnuta.png" />

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -355,7 +356,7 @@ namespace Pięciolinia
                 }
 
                 //6 - startowa lokacja nuty
-               
+
                 for (int i = 0; i < numberOfNotes; i++)
                 {
                     SelectElement(elementInfoList[i].Element);
@@ -394,13 +395,13 @@ namespace Pięciolinia
                         {
                             Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
                             ChangeUpDownValue(-1);
-                           
+
                         }
                         tempUpDown++;
                     }
 
                 }
-               
+
             }
 
             if (!tactControl) tactControl = true;
@@ -571,14 +572,15 @@ namespace Pięciolinia
         private void start_Btn_Click()
         {
             if (!isPlaying)
-            {
+            {  
                 isPlaying = true;
                 Console.WriteLine(elementInfoList.Count);
                 foreach (var note in elementInfoList)
                 {
-                    PlayAudio($"{AppDomain.CurrentDomain.BaseDirectory}sounds\\{note.CurrentType.ToString().ToUpper()}{note.UpDownValue}.wav");
+
+                    PlayAudio($"{note.UpDownValue}");
                     System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
-                    
+
                 }
                 isPlaying = false;
                 Console.WriteLine(elementInfoList);
@@ -588,11 +590,11 @@ namespace Pięciolinia
 
         private int getDelayForNoteType(char currentType)
         {
-            if(currentType == 'a')
+            if (currentType == 'a')
             {
                 return 3000;
             }
-            else if(currentType == 'b')
+            else if (currentType == 'b')
             {
                 return 3000;
             }
@@ -612,15 +614,14 @@ namespace Pięciolinia
 
         static void PlayAudio(string fileName)
         {
-            using (SoundPlayer player = new SoundPlayer(fileName))
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            var stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
+
+            using (SoundPlayer player = new SoundPlayer(stream))
             {
-                Console.WriteLine($"Playing: {fileName} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
-                player.PlaySync(); // Use Play() for asynchronous playback
-                
-                Console.WriteLine($"Finished playing: {fileName}  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+                player.PlaySync();
             }
         }
     }
-
-    
 }
