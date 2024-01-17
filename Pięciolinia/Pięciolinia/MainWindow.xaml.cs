@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +29,8 @@ namespace Pięciolinia
 
         // zmienna blokujaca mozliwosc poruszania nutami, kiedy żaden takt nie istnieje
         private bool tactControl = false;
+
+        private bool isPlaying = false;
 
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
@@ -350,7 +356,7 @@ namespace Pięciolinia
                 }
 
                 //6 - startowa lokacja nuty
-               
+
                 for (int i = 0; i < numberOfNotes; i++)
                 {
                     SelectElement(elementInfoList[i].Element);
@@ -389,13 +395,13 @@ namespace Pięciolinia
                         {
                             Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
                             ChangeUpDownValue(-1);
-                           
+
                         }
                         tempUpDown++;
                     }
 
                 }
-               
+
             }
 
             if (!tactControl) tactControl = true;
@@ -523,7 +529,7 @@ namespace Pięciolinia
 
             ColumnDefinition columnDefinition = new ColumnDefinition();
             mainGrid.ColumnDefinitions.Add(columnDefinition);
-
+            elementInfoList.Clear();
             tactControl = false;
         }
         private void inputTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -547,6 +553,75 @@ namespace Pięciolinia
         private void loadBtn_Click(object sender, RoutedEventArgs e)
         {
             LoadFromTxt();
+        }
+
+        private void startBtn_Click(object sender, RoutedEventArgs e)
+        {
+            start_Btn_Click();
+        }
+
+        private void stopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (isPlaying)
+            {
+                isPlaying = false;
+                Console.WriteLine(elementInfoList);
+            }
+        }
+
+        private void start_Btn_Click()
+        {
+            if (!isPlaying)
+            {  
+                isPlaying = true;
+                Console.WriteLine(elementInfoList.Count);
+                foreach (var note in elementInfoList)
+                {
+
+                    PlayAudio($"{note.UpDownValue}");
+                    System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
+
+                }
+                isPlaying = false;
+                Console.WriteLine(elementInfoList);
+
+            }
+        }
+
+        private int getDelayForNoteType(char currentType)
+        {
+            if (currentType == 'a')
+            {
+                return 3000;
+            }
+            else if (currentType == 'b')
+            {
+                return 3000;
+            }
+            else if (currentType == 'c')
+            {
+                return 3000;
+            }
+            else if (currentType == 'd')
+            {
+                return 3000;
+            }
+            else
+            {
+                return 3000;
+            }
+        }
+
+        static void PlayAudio(string fileName)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            var stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
+
+            using (SoundPlayer player = new SoundPlayer(stream))
+            {
+                player.PlaySync();
+            }
         }
     }
 }
