@@ -569,7 +569,7 @@ namespace Pięciolinia
             }
         }
 
-        private void start_Btn_Click()
+        private async void start_Btn_Click()
         {
             if (!isPlaying)
             {  
@@ -577,9 +577,13 @@ namespace Pięciolinia
                 Console.WriteLine(elementInfoList.Count);
                 foreach (var note in elementInfoList)
                 {
-
+                    if(isPlaying == false)
+                    {
+                        break;
+                    }
                     PlayAudio($"{note.UpDownValue}");
-                    System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
+                    await Task.Delay(getDelayForNoteType(note.CurrentType));
+                    //System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
 
                 }
                 isPlaying = false;
