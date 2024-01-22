@@ -114,6 +114,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -135,6 +136,9 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\n9.wav" />
+    <None Include="Resources\20s.wav" />
+    <None Include="Resources\10_ms.wav" />
     <None Include="Resources\pieclini.png" />
     <EmbeddedResource Include="Resources\n2.wav" />
     <EmbeddedResource Include="Resources\n1.wav" />

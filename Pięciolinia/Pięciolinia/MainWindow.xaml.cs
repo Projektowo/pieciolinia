@@ -579,7 +579,7 @@ namespace Pięciolinia
                 {
 
                     PlayAudio($"{note.UpDownValue}");
-                    System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
+                   System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
 
                 }
                 isPlaying = false;
@@ -592,23 +592,23 @@ namespace Pięciolinia
         {
             if (currentType == 'a')
             {
-                return 3000;
+                return 512;
             }
             else if (currentType == 'b')
             {
-                return 3000;
+                return 256;
             }
             else if (currentType == 'c')
             {
-                return 3000;
+                return 128;
             }
             else if (currentType == 'd')
             {
-                return 3000;
+                return 64;
             }
             else
             {
-                return 3000;
+                return 32;
             }
         }
 

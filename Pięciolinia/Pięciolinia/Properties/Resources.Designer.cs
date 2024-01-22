@@ -169,12 +169,11 @@ namespace Pięciolinia.Properties {
         }
         
         /// <summary>
-        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        ///   Wyszukuje zlokalizowany zasób typu System.IO.UnmanagedMemoryStream podobny do zasobu System.IO.MemoryStream.
         /// </summary>
-        internal static System.Drawing.Bitmap pieclini {
+        internal static System.IO.UnmanagedMemoryStream n9 {
             get {
-                object obj = ResourceManager.GetObject("pieclini", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetStream("n9", resourceCulture);
             }
         }
     }
