@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Pięciolinia"
         mc:Ignorable="d"
         Title="Pięciolinia" Height="600" Width="920"
+        MinWidth="920" MinHeight="600"
 		Icon="Icons/Ikona1.ico"
         WindowStyle="SingleBorderWindow"
         Background="Transparent"
@@ -46,6 +47,9 @@
                 <Grid Grid.Row="1"
                       Grid.ColumnSpan="8"
                       x:Name="mainGrid">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Images/pieciolinia.png"/>
+                    </Grid.Background>
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -123,14 +127,16 @@
                     Style="{StaticResource ButtonTheme}" Click="saveBtn_Click"/>
 
 
+            <!--
             <Button Grid.Row="3" 
                     Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Content="Eksportuj"
                     Style="{StaticResource ButtonTheme}"/>
+            -->
 
             <Button x:Name="loadBtn" Grid.Row="3" 
-                    Grid.Column="4"
+                    Grid.Column="3"
                     Grid.ColumnSpan="2"
                     Content="Wczytaj"
                     Style="{StaticResource ButtonTheme}" Click="loadBtn_Click"/>
