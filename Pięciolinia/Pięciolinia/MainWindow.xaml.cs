@@ -217,6 +217,8 @@ namespace Pięciolinia
                 newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(newElementInfo.ImagePaths[newElementInfo.CurrentImageIndex], UriKind.RelativeOrAbsolute));
             }
 
+            
+
             // ustawienie indexu grafiki
             foreach (var info in elementInfoList.Skip(elementInfoList.Count - columnCount))
             {
@@ -244,9 +246,14 @@ namespace Pięciolinia
             if (elementInfoList.Count >= columnCount)
             {
                 SelectElement(elementInfoList[elementInfoList.Count - columnCount].Element);
-                highlightElement();
                 
+                highlightElement();
+
             }
+
+                int numberOfElements = elementInfoList.Count;
+                currentIndex = numberOfElements - columnCount;
+            
         }
 
 
