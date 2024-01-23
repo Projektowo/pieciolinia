@@ -52,7 +52,7 @@
                     </Grid.Background>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -127,16 +127,16 @@
                     Style="{StaticResource ButtonTheme}" Click="saveBtn_Click"/>
 
 
-            <!--
+            
             <Button Grid.Row="3" 
                     Grid.Column="2"
                     Grid.ColumnSpan="2"
-                    Content="Eksportuj"
-                    Style="{StaticResource ButtonTheme}"/>
-            -->
+                    Content="Usuń nutę"
+                    Style="{StaticResource ButtonTheme}" Click="deleteNoteBtn_Click"/>
+            
 
             <Button x:Name="loadBtn" Grid.Row="3" 
-                    Grid.Column="3"
+                    Grid.Column="4"
                     Grid.ColumnSpan="2"
                     Content="Wczytaj"
                     Style="{StaticResource ButtonTheme}" Click="loadBtn_Click"/>

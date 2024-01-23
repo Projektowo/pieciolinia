@@ -35,6 +35,8 @@ namespace Pięciolinia
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
+        int currentIndex;
+
         public MainWindow()
         {
             //inizjalizacja
@@ -85,6 +87,37 @@ namespace Pięciolinia
 
             // znowu wizualne bzdety
             // Todo: dowiedziec sie w jaki sposob implementuje sie rzeczy typu Effects, bo internet nie wie
+
+            //// Unhighlight the previously selected element
+            //if (selectedElement != null)
+            //{
+            //    if (selectedElement is Image selectedImage)
+            //    {
+            //        selectedImage.Effect = null; // Remove the effect on the previously selected element
+            //    }
+            //}
+
+            // Select the new element
+            selectedElement = element;
+
+            // Highlight the selected element with a drop shadow effect
+            if (selectedElement is Image selectedImage)
+            {
+                DropShadowEffect dropShadowEffect = new DropShadowEffect
+                {
+                    ShadowDepth = 0,
+                    BlurRadius = 15,
+                    Color = Colors.Yellow // You can set any color you prefer
+                };
+
+                selectedImage.Effect = dropShadowEffect;
+            }
+            else
+            {
+                // If the selected element is not an Image, you may need to adjust the handling
+                // based on the actual type of the element.
+                // For example, you could check for other types like Button, Rectangle, etc.
+            }
         }
 
 
@@ -211,9 +244,41 @@ namespace Pięciolinia
             if (elementInfoList.Count >= columnCount)
             {
                 SelectElement(elementInfoList[elementInfoList.Count - columnCount].Element);
+                highlightElement();
+                
             }
         }
 
+
+        private void highlightElement()
+        {
+            foreach (var elementInfo in elementInfoList)
+            {
+                if (elementInfo.Element is Image image)
+                {
+                    // Remove the effect by setting it to null
+                    image.Effect = null;
+                }
+            }
+
+            ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
+            // Assuming selectedElementInfo is the selected element
+            if (selectedElementInfo != null && selectedElementInfo.Element is Image selectedImage)
+            {
+                // Create a DropShadowEffect
+                DropShadowEffect shadowEffect = new DropShadowEffect
+                {
+                    ShadowDepth = 0.5,
+                    BlurRadius = 15,
+                    Color = Colors.DarkBlue,
+                    Opacity = 1,
+                    Direction = 315 // Change the direction based on your preference
+                };
+
+                // Apply the effect to the selected Image
+                selectedImage.Effect = shadowEffect;
+            }
+        }
 
         // podmiana grafiki danego elementu
         private void ChangeImage(int direction)
@@ -428,16 +493,35 @@ namespace Pięciolinia
                 {
                     case Key.A:
                         // wybierz element do lewej
-                        int currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                        int newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
-                        SelectElement(elementInfoList[newIndex].Element);
+                        if (currentIndex == 0)
+                        {
+                            currentIndex = elementInfoList.Count - 1;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
+                        else
+                        {
+                            currentIndex--;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
+                            
                         break;
 
                     case Key.D:
                         // wybierz element do prawej
-                        currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                        newIndex = (currentIndex + 1) % elementInfoList.Count;
-                        SelectElement(elementInfoList[newIndex].Element);
+                        if (currentIndex == elementInfoList.Count-1)
+                        {
+                            currentIndex = 0;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
+                        else
+                        {
+                            currentIndex++;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
                         break;
 
                     case Key.W:
@@ -569,6 +653,59 @@ namespace Pięciolinia
             }
         }
 
+        private void deleteNoteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int columnIndexToRemove = currentIndex;
+
+            // Remove elements associated with the column
+            foreach (var elementInfo in elementInfoList.ToArray())
+            {
+                if (Grid.GetColumn(elementInfo.Element) == columnIndexToRemove)
+                {
+                    // Remove any effects or highlights if applied
+                    // ...
+
+                    // Remove the element from the grid
+                    mainGrid.Children.Remove(elementInfo.Element);
+
+                    // Remove the element from the list
+                    elementInfoList.Remove(elementInfo);
+                }
+            }
+
+            // Remove the column definition
+            mainGrid.ColumnDefinitions.RemoveAt(columnIndexToRemove);
+
+            // Update column indices for remaining elements
+            foreach (var elementInfo in elementInfoList)
+            {
+                int currentColumn = Grid.GetColumn(elementInfo.Element);
+
+                // Update the column index if it was after the removed column
+                if (currentColumn > columnIndexToRemove)
+                {
+                    Grid.SetColumn(elementInfo.Element, currentColumn - 1);
+                }
+            }
+            
+            if (currentIndex == 0)
+            {
+                currentIndex = 0;
+            }
+            else
+            {
+                currentIndex--;
+            }
+
+            if (elementInfoList.Count > 0)
+            {
+                SelectElement(elementInfoList[currentIndex].Element);
+                highlightElement();
+            }
+            
+
+        }
+
         private async void start_Btn_Click()
         {
             if (!isPlaying)
@@ -628,5 +765,7 @@ namespace Pięciolinia
                 player.PlaySync();
             }
         }
+
+        
     }
 }
