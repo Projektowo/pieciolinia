@@ -359,7 +359,14 @@ namespace Pięciolinia
 
             foreach (var ele in elementInfoList)
             {
-                data += $"{ele.CurrentType}{ele.UpDownValue}\n";
+                if(ele.UpDownValue < 9)
+                {
+                    data += $"{ele.CurrentType}0{ele.UpDownValue+1}\n";
+                }
+                if(ele.UpDownValue >= 9)
+                {
+                    data += $"{ele.CurrentType}{ele.UpDownValue + 1}\n";
+                }
             }
 
             //Console.WriteLine(data);
@@ -391,9 +398,10 @@ namespace Pięciolinia
                 var fileStream = openFileDialog.OpenFile();
                 string loadedTact = "";
                 string loadedNotes = "";
-
+                int numberOfNotes = 0;
 
                 bool catchTact = true;
+
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
                     if (catchTact)
@@ -401,11 +409,15 @@ namespace Pięciolinia
                         loadedTact = reader.ReadLine();
                         catchTact = false;
                     }
-                    loadedNotes = reader.ReadToEnd();
+                    while (!reader.EndOfStream) {
+                        numberOfNotes++;
+                        loadedNotes += reader.ReadLine() + "\n";
+                    }
                 }
 
                 //Console.WriteLine(loadedTact);
                 //Console.WriteLine(loadedNotes);
+                //Console.WriteLine(numberOfNotes);
 
                 //Emuluje reczne dodanie taktu przez uzytkownika
                 inputTextBox.Text = loadedTact;
@@ -413,29 +425,60 @@ namespace Pięciolinia
 
                 //Zapamietac - co trzeci element loadedNotes to \n
 
-                var numberOfNotes = loadedNotes.Length / 3;
-                //Console.WriteLine(loadedNotes);
-                //Console.WriteLine(loadedTact[0]); <- ilosc nut na jeden takt
+                string[] getTact = loadedTact.Split('/');
+                //Console.WriteLine(leftTact[0]);// <- ilosc nut na jeden takt
 
                 //Dodawanie kolejnych taktow jesli jest wiecej niz 1
                 int tempNoN = numberOfNotes;
-                int NotesOnTact = (int)char.GetNumericValue(loadedTact[0]);
+                int NotesOnTact = Int32.Parse(getTact[0]);
+                int fullTacts = 0;
+                int forcedTacts = 0;
 
                 while (tempNoN > NotesOnTact)
                 {
                     ProcessUserInput(loadedTact);
                     tempNoN -= NotesOnTact;
+                    fullTacts++;
                 }
+
+                if(tempNoN> 0)
+                {
+                    forcedTacts = fullTacts + 1;
+                }
+                else
+                {
+                    forcedTacts = fullTacts;
+                }
+
+
+
+                //Console.WriteLine(fullTacts); // <- ilosc pelnych taktow
+                //Console.WriteLine(forcedTacts); // <- ilosc wymuszonych taktow
 
                 //6 - startowa lokacja nuty
 
                 for (int i = 0; i < numberOfNotes; i++)
                 {
                     SelectElement(elementInfoList[i].Element);
-                    int tempNoteVal = GetNoteIntValue(loadedNotes[3 * i]);
-                    int tempUpDown = (int)char.GetNumericValue(loadedNotes[3 * i + 1]); // Konwersja z char na int
-                    int trueTact = (int)char.GetNumericValue(loadedTact[2]);
-                    //Console.WriteLine($"{loadedNotes[3 * i]} {loadedNotes[3 * i + 1]} {loadedTact[2]}");
+                    int tempNoteVal = GetNoteIntValue(loadedNotes[4 * i]);
+
+                    int tempFirstUD = (int)char.GetNumericValue(loadedNotes[4 * i + 1]);
+                    int tempSecondUD = (int)char.GetNumericValue(loadedNotes[4 * i + 2]);
+
+
+                    int tempUpDown = 0;
+
+                    if (tempFirstUD == 0)
+                    {
+                        tempUpDown = tempSecondUD - 1;
+                    }
+                    else
+                    {
+                        tempUpDown = tempSecondUD + 10 - 1;
+                    }
+
+                    int trueTact = Int32.Parse(getTact[1]);
+                    //Console.WriteLine($"{loadedNotes[4 * i]} {loadedNotes[4 * i + 1]} {getTact[1]}");
                     //Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
 
                     //Zmiana typu nuty
@@ -463,7 +506,7 @@ namespace Pięciolinia
 
                     while (tempUpDown < 6)
                     {
-                        if (Grid.GetRow(selectedElement) - 1 != 10)
+                        if (Grid.GetRow(selectedElement) - 1 != 11)
                         {
                             Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
                             ChangeUpDownValue(-1);
@@ -473,10 +516,33 @@ namespace Pięciolinia
                     }
 
                 }
+                //fullTacts; // <- ilosc pelnych taktow
+                //forcedTacts; // <- ilosc wymuszonych taktow
+
+                if (fullTacts != 0 & fullTacts < forcedTacts)
+                {
+                    int forcedNumberOfNotes = forcedTacts * NotesOnTact;
+                    //Console.WriteLine(forcedNumberOfNotes);
+                    //Console.WriteLine(numberOfNotes);
+
+                    int tempdel = forcedNumberOfNotes - numberOfNotes;
+                    int tempdelnon = numberOfNotes;
+                    while(tempdel > 0)
+                    {
+                        currentIndex = tempdelnon;
+                        Delete();
+                        tempdelnon--;
+                        tempdel--;
+                    }
+                }
 
             }
 
             if (!tactControl) tactControl = true;
+
+
+            
+
 
             foreach (var elementInfo in elementInfoList)
             {
@@ -579,45 +645,6 @@ namespace Pięciolinia
 
         //walidacja textboxa na takt za pomocą regexa
 
-        //        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣴⣶⣿⣿⣿⠳⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣻⣿⣿⠠⢼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡿⢿⣭⠽⠿⣿⠀⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡋⣷⠿⠀⢀⣿⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠶⢺⢦⣄⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠁⠂⢀⢠⡌⢹⠀⢸⠀⠀⣀⣤⡴⠖⠒⠋⠉⠀⠀⠀⢸⡀⠙⣧⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡖⢺⣌⠉⢸⣿⣶⢾⡛⣿⣅⣿⣷⣶⠠⢤⡀⠀⠀⠀⢸⡇⠈⣏⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣿⡟⢛⣿⣶⣾⣿⣿⡀⠸⣿⠟⠟⢿⡏⣦⣼⡆⠀⠀⢀⣸⡇⠀⣿⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⣀⣠⣴⣶⣾⢿⢹⡏⣉⠉⣻⣿⠈⣿⡶⠰⡷⢻⠏⠀⡇⣼⣴⣿⣿⣷⣶⣿⣿⣿⣿⣦⣿⠀⠀⠀⠀⠀⠀
-        //⢀⣠⣤⡴⣶⡿⣏⣿⣿⣿⣿⣿⣿⡇⠁⠘⣻⡟⠘⣿⣧⣰⣷⣾⣼⣷⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀
-        //⢸⡟⣾⣷⣥⣠⣋⠻⢿⣿⡋⣿⢸⣇⣴⣾⡿⢄⢠⡿⣿⣿⣿⣿⣿⣿⠿⡟⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⢸⡷⡏⠃⣄⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⠹⣿⣼⡾⣟⣿⣿⢿⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⢸⣇⣧⣦⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⣿⠀⠀⣸⣇⣹⣿⠁⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠙⠻⣿⣿⣿⠿⠛⠛⠋⠉⠁⠀⠀⠀⣿⠀⠀⣾⣏⠉⢸⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠿⡷⠾⠛⠙⠓⠾⢦⣼⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣧⣶⣾⣿⣤⣤⠄⠀⠉⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣏⣙⣿⣿⣿⣿⣶⡖⠀⠀⠈⠲⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣭⠟⠛⠿⣯⡈⢻⣿⣿⣧⡀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣦⣀⣏⣦⢹⣿⣿⣿⣿⡯⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣏⠀⢉⣽⢻⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⡿⡿⠿⣿⣿⣿⣿⢿⣿⣯⣳⡀⠀⠀⠀⢹⡄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣦⣿⣿⠿⣯⣽⣿⠘⣿⣿⣿⣿⣗⠄⠀⠈⠛⠻⣿⡷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡏⠀⣿⡿⣿⠀⢿⣿⣿⣿⢿⠃⠀⠀⠀⠀⣇⣷⡸⡟⠶⣤⡀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⠈⣾⠏⠀⣿⠀⢸⣿⠏⠙⢾⣄⠀⠀⠀⠀⡿⣿⣇⣧⠀⠀⠉⠳⢤⡄⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣿⢨⠘⠀⠀⣾⠀⢸⣿⣷⣄⣀⠙⢷⣤⣦⣠⡇⣿⡟⢻⠀⠀⠀⠀⠈⢻⠶⣤⣀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣻⠀⠀⠀⣛⠀⢸⠉⠻⠿⣿⣶⣀⠙⢾⣿⠁⣿⣿⠘⣇⠀⠀⠀⠀⠈⣷⠀⠁
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡆⠀⠀⠀⢹⡄⢸⠀⠀⠀⠨⣿⣿⣿⣾⣿⠘⣿⣿⠀⠋⠀⠀⠀⠀⠀⠛⠃⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠿⠇⠀⠀⠀⢸⡇⠸⠄⠀⠀⣸⣿⣿⣿⣿⢃⣈⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠾⠇⠀⠀⠀⠀⢼⣿⣿⣿⣷⣾⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡏⢻⣧⣩⣽⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣬⣿⣿⠃⠈⢿⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠟⠀⠀⠀⠸⠇
-        //
-        //
-        // https://www.youtube.com/watch?v=Zttt_rv87no⠀⠀⠀⠀⠀⠀
-        // bruh
-        // https://www.youtube.com/watch?v=Z3J_MCbwaJ0
-        // bruh
-        // https://www.youtube.com/watch?v=AINfHRXx1kQ
         private void TactValidation(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9/]+");
@@ -632,7 +659,6 @@ namespace Pięciolinia
             mainGrid.ColumnDefinitions.Clear();
 
             ColumnDefinition columnDefinition = new ColumnDefinition();
-            mainGrid.ColumnDefinitions.Add(columnDefinition);
             elementInfoList.Clear();
             tactControl = false;
         }
@@ -673,7 +699,7 @@ namespace Pięciolinia
             }
         }
 
-        private void deleteNoteBtn_Click(object sender, RoutedEventArgs e)
+        private void Delete()
         {
             if (elementInfoList.Count > 0)
             {
@@ -725,8 +751,11 @@ namespace Pięciolinia
                     highlightElement();
                 }
             }
-            
+        }
 
+        private void deleteNoteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Delete();
         }
 
         private async void start_Btn_Click()
@@ -741,7 +770,7 @@ namespace Pięciolinia
                     {
                         break;
                     }
-                    PlayAudio($"{note.UpDownValue}");
+                    PlayAudio($"{note.UpDownValue+1}");
 
                     await Task.Delay(getDelayForNoteType(note.CurrentType));
                     //System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
@@ -757,23 +786,23 @@ namespace Pięciolinia
         {
             if (currentType == 'a')
             {
-                return 512;
+                return 64;
             }
             else if (currentType == 'b')
             {
-                return 256;
+                return 32;
             }
             else if (currentType == 'c')
             {
-                return 128;
+                return 16;
             }
             else if (currentType == 'd')
             {
-                return 64;
+                return 8;
             }
             else
             {
-                return 32;
+                return 4;
             }
         }
 

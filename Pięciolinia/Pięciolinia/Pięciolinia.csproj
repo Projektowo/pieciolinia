@@ -136,11 +136,11 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\szesnastka.png" />
-    <None Include="Resources\polnuta.png" />
-    <None Include="Resources\osemka.png" />
-    <None Include="Resources\cwiercnuta.png" />
-    <None Include="Resources\calanuta.png" />
+    <Resource Include="Resources\szesnastka.png" />
+    <Resource Include="Resources\polnuta.png" />
+    <Resource Include="Resources\osemka.png" />
+    <Resource Include="Resources\cwiercnuta.png" />
+    <Resource Include="Resources\calanuta.png" />
     <EmbeddedResource Include="Resources\n9.wav" />
     <None Include="Resources\20s.wav" />
     <None Include="Resources\10_ms.wav" />
