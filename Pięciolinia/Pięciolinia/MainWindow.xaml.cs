@@ -763,7 +763,7 @@ namespace Pięciolinia
             if (!isPlaying)
             {  
                 isPlaying = true;
-                Console.WriteLine(elementInfoList.Count);
+                //Console.WriteLine(elementInfoList.Count);
                 foreach (var note in elementInfoList)
                 {
                     if(isPlaying == false)
@@ -777,7 +777,7 @@ namespace Pięciolinia
 
                 }
                 isPlaying = false;
-                Console.WriteLine(elementInfoList);
+                //Console.WriteLine(elementInfoList);
 
             }
         }
