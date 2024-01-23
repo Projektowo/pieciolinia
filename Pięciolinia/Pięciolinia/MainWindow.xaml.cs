@@ -33,7 +33,7 @@ namespace Pięciolinia
         private bool isPlaying = false;
 
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
-        private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
+        private string[] sharedImagePaths = { "/Resources/calanuta.png", "/Resources/polnuta.png", "/Resources/cwiercnuta.png", "/Resources/osemka.png", "/Resources/szesnastka.png" };
 
         int currentIndex;
 
@@ -477,6 +477,19 @@ namespace Pięciolinia
             }
 
             if (!tactControl) tactControl = true;
+
+            foreach (var elementInfo in elementInfoList)
+            {
+                if (elementInfo.Element is Image image)
+                {
+                    // Remove the effect by setting it to null
+                    image.Effect = null;
+                }
+            }
+
+            currentIndex = 0;
+            SelectElement(elementInfoList[currentIndex].Element);
+            highlightElement();
         }
 
 
@@ -542,7 +555,7 @@ namespace Pięciolinia
 
                     case Key.S:
                         //przesunięcie nuty niżej
-                        if (Grid.GetRow(selectedElement) - 1 != 10)
+                        if (Grid.GetRow(selectedElement) - 1 != 11)
                         {
                             Grid.SetRow(selectedElement, Grid.GetRow(selectedElement) + 1);
                             ChangeUpDownValue(-1);
