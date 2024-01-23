@@ -662,52 +662,55 @@ namespace Pięciolinia
 
         private void deleteNoteBtn_Click(object sender, RoutedEventArgs e)
         {
-            int columnIndexToRemove = currentIndex;
-
-            // Remove elements associated with the column
-            foreach (var elementInfo in elementInfoList.ToArray())
-            {
-                if (Grid.GetColumn(elementInfo.Element) == columnIndexToRemove)
-                {
-                    // Remove any effects or highlights if applied
-                    // ...
-
-                    // Remove the element from the grid
-                    mainGrid.Children.Remove(elementInfo.Element);
-
-                    // Remove the element from the list
-                    elementInfoList.Remove(elementInfo);
-                }
-            }
-
-            // Remove the column definition
-            mainGrid.ColumnDefinitions.RemoveAt(columnIndexToRemove);
-
-            // Update column indices for remaining elements
-            foreach (var elementInfo in elementInfoList)
-            {
-                int currentColumn = Grid.GetColumn(elementInfo.Element);
-
-                // Update the column index if it was after the removed column
-                if (currentColumn > columnIndexToRemove)
-                {
-                    Grid.SetColumn(elementInfo.Element, currentColumn - 1);
-                }
-            }
-            
-            if (currentIndex == 0)
-            {
-                currentIndex = 0;
-            }
-            else
-            {
-                currentIndex--;
-            }
-
             if (elementInfoList.Count > 0)
             {
-                SelectElement(elementInfoList[currentIndex].Element);
-                highlightElement();
+                int columnIndexToRemove = currentIndex;
+
+                // Remove elements associated with the column
+                foreach (var elementInfo in elementInfoList.ToArray())
+                {
+                    if (Grid.GetColumn(elementInfo.Element) == columnIndexToRemove)
+                    {
+                        // Remove any effects or highlights if applied
+                        // ...
+
+                        // Remove the element from the grid
+                        mainGrid.Children.Remove(elementInfo.Element);
+
+                        // Remove the element from the list
+                        elementInfoList.Remove(elementInfo);
+                    }
+                }
+
+                // Remove the column definition
+                mainGrid.ColumnDefinitions.RemoveAt(columnIndexToRemove);
+
+                // Update column indices for remaining elements
+                foreach (var elementInfo in elementInfoList)
+                {
+                    int currentColumn = Grid.GetColumn(elementInfo.Element);
+
+                    // Update the column index if it was after the removed column
+                    if (currentColumn > columnIndexToRemove)
+                    {
+                        Grid.SetColumn(elementInfo.Element, currentColumn - 1);
+                    }
+                }
+
+                if (currentIndex == 0)
+                {
+                    currentIndex = 0;
+                }
+                else
+                {
+                    currentIndex--;
+                }
+
+                if (elementInfoList.Count > 0)
+                {
+                    SelectElement(elementInfoList[currentIndex].Element);
+                    highlightElement();
+                }
             }
             
 
