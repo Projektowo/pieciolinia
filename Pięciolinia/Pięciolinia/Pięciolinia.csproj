@@ -136,7 +136,7 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\n9.wav" />
+    <EmbeddedResource Include="Resources\n9.wav" />
     <None Include="Resources\20s.wav" />
     <None Include="Resources\10_ms.wav" />
     <None Include="Resources\pieclini.png" />
