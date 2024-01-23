@@ -136,21 +136,11 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Resources\calanuta.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\cwiercnuta.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\osemka.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\polnuta.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <AdditionalFiles Include="Resources\szesnastka.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AdditionalFiles>
+    <None Include="Resources\szesnastka.png" />
+    <None Include="Resources\polnuta.png" />
+    <None Include="Resources\osemka.png" />
+    <None Include="Resources\cwiercnuta.png" />
+    <None Include="Resources\calanuta.png" />
     <EmbeddedResource Include="Resources\n9.wav" />
     <None Include="Resources\20s.wav" />
     <None Include="Resources\10_ms.wav" />

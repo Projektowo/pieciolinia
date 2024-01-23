@@ -61,6 +61,26 @@ namespace Pięciolinia.Properties {
         }
         
         /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calanuta {
+            get {
+                object obj = ResourceManager.GetObject("calanuta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cwiercnuta {
+            get {
+                object obj = ResourceManager.GetObject("cwiercnuta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.IO.UnmanagedMemoryStream podobny do zasobu System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream n1 {
@@ -174,6 +194,36 @@ namespace Pięciolinia.Properties {
         internal static System.IO.UnmanagedMemoryStream n9 {
             get {
                 return ResourceManager.GetStream("n9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap osemka {
+            get {
+                object obj = ResourceManager.GetObject("osemka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polnuta {
+            get {
+                object obj = ResourceManager.GetObject("polnuta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap szesnastka {
+            get {
+                object obj = ResourceManager.GetObject("szesnastka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

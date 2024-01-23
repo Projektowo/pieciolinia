@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="calanuta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calanuta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cwiercnuta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cwiercnuta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="n1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\n1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -156,5 +162,14 @@
   </data>
   <data name="n9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\n9.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="osemka" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\osemka.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="polnuta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\polnuta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="szesnastka" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\szesnastka.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
