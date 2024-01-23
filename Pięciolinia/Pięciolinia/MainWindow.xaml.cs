@@ -36,7 +36,6 @@ namespace Pięciolinia
         private string[] sharedImagePaths = { "/Images/calanuta.png", "/Images/polnuta.png", "/Images/cwiercnuta.png", "/Images/osemkapojedynczo.png", "/Images/szesnastka.png" };
 
         int currentIndex;
-        int newIndex;
 
         public MainWindow()
         {
@@ -494,11 +493,16 @@ namespace Pięciolinia
                 {
                     case Key.A:
                         // wybierz element do lewej
-                        if (elementInfoList.Count != 0)
+                        if (currentIndex == 0)
                         {
-                            currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                            newIndex = (currentIndex - 1 + elementInfoList.Count) % elementInfoList.Count;
-                            SelectElement(elementInfoList[newIndex].Element);
+                            currentIndex = elementInfoList.Count - 1;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
+                        else
+                        {
+                            currentIndex--;
+                            SelectElement(elementInfoList[currentIndex].Element);
                             highlightElement();
                         }
                             
@@ -506,11 +510,16 @@ namespace Pięciolinia
 
                     case Key.D:
                         // wybierz element do prawej
-                        if (elementInfoList.Count != 0)
+                        if (currentIndex == elementInfoList.Count-1)
                         {
-                            currentIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-                            newIndex = (currentIndex + 1) % elementInfoList.Count;
-                            SelectElement(elementInfoList[newIndex].Element);
+                            currentIndex = 0;
+                            SelectElement(elementInfoList[currentIndex].Element);
+                            highlightElement();
+                        }
+                        else
+                        {
+                            currentIndex++;
+                            SelectElement(elementInfoList[currentIndex].Element);
                             highlightElement();
                         }
                         break;
@@ -646,88 +655,54 @@ namespace Pięciolinia
 
         private void deleteNoteBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Find the ElementInfo corresponding to the selected element
-            ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
+            int columnIndexToRemove = currentIndex;
 
-            int columnIndex = Grid.GetColumn(selectedElementInfo.Element)-1;
-
-            if (selectedElementInfo != null)
+            // Remove elements associated with the column
+            foreach (var elementInfo in elementInfoList.ToArray())
             {
-                // Remove the associated image from the grid
-                mainGrid.Children.Remove(selectedElementInfo.Element);
-
-
-
-                
-
-                // Remove the ElementInfo from the list
-                elementInfoList.Remove(selectedElementInfo);
-
-                // Find the ElementInfo corresponding to the selected element
-                int currentImageIndex = selectedElementInfo.CurrentImageIndex;
-                if (elementInfoList.Count > 0)
+                if (Grid.GetColumn(elementInfo.Element) == columnIndexToRemove)
                 {
-                    if (newIndex == 0)
-                    {
-                        int lastIndex = elementInfoList.Count - 1;
-                        newIndex = lastIndex;
-                        currentIndex = lastIndex - 1;
-                        // Remove the column definition
-                        columnIndex = lastIndex;
-                        mainGrid.ColumnDefinitions.RemoveAt(columnIndex);
+                    // Remove any effects or highlights if applied
+                    // ...
 
-                        SelectElement(elementInfoList[lastIndex].Element);
-                        highlightElement();
-                    }
-                    else
-                    {// Remove the column definition
-                        mainGrid.ColumnDefinitions.RemoveAt(columnIndex);
+                    // Remove the element from the grid
+                    mainGrid.Children.Remove(elementInfo.Element);
 
-                        SelectElement(elementInfoList[newIndex - 1].Element);
-                        highlightElement();
-
-                        newIndex--;
-                        currentIndex--;
-                    }
+                    // Remove the element from the list
+                    elementInfoList.Remove(elementInfo);
                 }
             }
 
+            // Remove the column definition
+            mainGrid.ColumnDefinitions.RemoveAt(columnIndexToRemove);
 
+            // Update column indices for remaining elements
+            foreach (var elementInfo in elementInfoList)
+            {
+                int currentColumn = Grid.GetColumn(elementInfo.Element);
 
+                // Update the column index if it was after the removed column
+                if (currentColumn > columnIndexToRemove)
+                {
+                    Grid.SetColumn(elementInfo.Element, currentColumn - 1);
+                }
+            }
+            
+            if (currentIndex == 0)
+            {
+                currentIndex = 0;
+            }
+            else
+            {
+                currentIndex--;
+            }
 
-
-            ////ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
-
-            //int selectedIndex = elementInfoList.FindIndex(info => info.Element == selectedElement);
-
-            //if (selectedIndex != -1)
-            //{
-            //    elementInfoList.RemoveAt(selectedIndex);
-            //}
-
-
-            //// Remove the image from the UI
-            //UIElement imageToRemove = mainGrid.Children
-            //    .OfType<Image>()
-            //    .FirstOrDefault(img => Grid.GetColumn(img) == selectedIndex);
-
-            //if (imageToRemove != null)
-            //{
-            //    mainGrid.Children.Remove(imageToRemove);
-            //}
-
-            //// Remove the column from the grid
-            //mainGrid.ColumnDefinitions.RemoveAt(3);
-
-            //if (imageToRemove is IDisposable disposableImage)
-            //{
-            //    disposableImage.Dispose();
-            //}
-
-            ////if (currentIndex > 0)
-            ////{
-            ////    SelectElement(elementInfoList[currentIndex - 1].Element);
-            ////}
+            if (elementInfoList.Count > 0)
+            {
+                SelectElement(elementInfoList[currentIndex].Element);
+                highlightElement();
+            }
+            
 
         }
 
