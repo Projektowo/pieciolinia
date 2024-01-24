@@ -136,6 +136,13 @@
     <Content Include="Icons\Ikona1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\n14.wav" />
+    <Content Include="Resources\pauzacalonutowa.wav" />
+    <Resource Include="Resources\pauzacalonutowa.png" />
+    <Resource Include="Resources\pauzacwiercnutowa.png" />
+    <Resource Include="Resources\pauzaosemkowa.png" />
+    <Resource Include="Resources\pauzapolnutowa.png" />
+    <Resource Include="Resources\pauzaszesnastkowa.png" />
     <Resource Include="Resources\szesnastka.png" />
     <Resource Include="Resources\polnuta.png" />
     <Resource Include="Resources\osemka.png" />

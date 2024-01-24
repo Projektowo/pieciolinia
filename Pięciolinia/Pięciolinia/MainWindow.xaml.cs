@@ -33,7 +33,7 @@ namespace Pięciolinia
         private bool isPlaying = false;
 
         //tablica przechowująca nuty/pauzy (a dokladnie ich grafiki)
-        private string[] sharedImagePaths = { "/Resources/calanuta.png", "/Resources/polnuta.png", "/Resources/cwiercnuta.png", "/Resources/osemka.png", "/Resources/szesnastka.png" };
+        private string[] sharedImagePaths = { "/Resources/calanuta.png", "/Resources/polnuta.png", "/Resources/cwiercnuta.png", "/Resources/osemka.png", "/Resources/szesnastka.png", "/Resources/pauzacalonutowa.png", "/Resources/pauzapolnutowa.png", "/Resources/pauzacwiercnutowa.png", "/Resources/pauzaosemkowa.png", "/Resources/pauzaszesnastkowa.png" };
 
         int currentIndex;
 
@@ -346,6 +346,26 @@ namespace Pięciolinia
 
                 case 'e':
                     value = 5;
+                    break;
+
+                case 'f':
+                    value = 6;
+                    break;
+
+                case 'g':
+                    value = 7;
+                    break;
+
+                case 'h':
+                    value = 8;
+                    break;
+
+                case 'i':
+                    value = 9;
+                    break;
+
+                case 'j':
+                    value = 0;
                     break;
             }
 
@@ -761,16 +781,24 @@ namespace Pięciolinia
         private async void start_Btn_Click()
         {
             if (!isPlaying)
-            {  
+            {
                 isPlaying = true;
                 //Console.WriteLine(elementInfoList.Count);
                 foreach (var note in elementInfoList)
                 {
-                    if(isPlaying == false)
+                    if (isPlaying == false)
                     {
                         break;
                     }
-                    PlayAudio($"{note.UpDownValue+1}");
+                    if (note.CurrentType == 'f' || note.CurrentType == 'g' || note.CurrentType == 'h' || note.CurrentType == 'i' || note.CurrentType == 'j')
+                    {
+                        await Task.Delay(getDelayForNoteType(note.CurrentType));
+                    }
+                    else
+                    {
+                        PlayAudio($"{note.UpDownValue + 1}", note.CurrentType);
+                    }
+                    
 
                     await Task.Delay(getDelayForNoteType(note.CurrentType));
                     //System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
@@ -800,18 +828,60 @@ namespace Pięciolinia
             {
                 return 8;
             }
-            else
+            else if (currentType == 'e')
             {
                 return 4;
             }
+
+
+
+            else if (currentType == 'f')
+            {
+                return 128 + 200;
+            }
+            else if (currentType == 'g')
+            {
+                return 64 + 200;
+            }
+            else if (currentType == 'h')
+            {
+                return 32 + 200;
+            }
+            else if (currentType == 'i')
+            {
+                return 16 + 200;
+            }
+            else if (currentType == 'j')
+            {
+                return 8 + 200;
+            }
+
+
+
+            else
+            {
+                return 0;
+            }
         }
 
-        static void PlayAudio(string fileName)
+        static void PlayAudio(string fileName, int currentType)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             var stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
 
+            //if (currentType > 13)
+            //{
+            //    stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n14.wav");
+            //}
+            //else
+            //{
+            //    stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
+            //}
+
+
+
+            
             using (SoundPlayer player = new SoundPlayer(stream))
             {
                 player.PlaySync();

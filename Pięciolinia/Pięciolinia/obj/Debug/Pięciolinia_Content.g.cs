@@ -9,5 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/ikona1.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/n14.wav")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/pauzacalonutowa.wav")]
 
 
