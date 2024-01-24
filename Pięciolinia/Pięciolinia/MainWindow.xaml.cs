@@ -59,64 +59,27 @@ namespace Pięciolinia
             {
                 //new ElementInfo { Element = elementImage1 },
                 //new ElementInfo { Element = elementImage2 },
-                // dodatkowe elementy >> here <<
             };
 
-
-            ////indexy obrazów poszczególnych elementów
-            //foreach (var elementInfo in elementInfoList)
-            //{
-            //    elementInfo.ImagePaths = sharedImagePaths;
-            //    elementInfo.CurrentImageIndex = 0;
-            //    elementInfo.UpDownValue = 6; // 6 to wartość początkowa >> DO UZGODNIENIA <<
-            //}
         }
 
 
         //wybieranie nuty za pomocą klawiszy lewo/prawo
         private void SelectElement(UIElement element)
         {
-            // odznacza aktywny element
-            if (selectedElement != null)
-            {
-                // jakieś wizualne pierdoły można tu dodać
-            }
-
-            // wybranie nowego elementu
             selectedElement = element;
 
-            // znowu wizualne bzdety
-            // Todo: dowiedziec sie w jaki sposob implementuje sie rzeczy typu Effects, bo internet nie wie
-
-            //// Unhighlight the previously selected element
-            //if (selectedElement != null)
-            //{
-            //    if (selectedElement is Image selectedImage)
-            //    {
-            //        selectedImage.Effect = null; // Remove the effect on the previously selected element
-            //    }
-            //}
-
-            // Select the new element
-            selectedElement = element;
-
-            // Highlight the selected element with a drop shadow effect
+            // Odznacz element dodając efekt cienia do nuty
             if (selectedElement is Image selectedImage)
             {
                 DropShadowEffect dropShadowEffect = new DropShadowEffect
                 {
                     ShadowDepth = 0,
                     BlurRadius = 15,
-                    Color = Colors.Yellow // You can set any color you prefer
+                    Color = Colors.Yellow
                 };
 
                 selectedImage.Effect = dropShadowEffect;
-            }
-            else
-            {
-                // If the selected element is not an Image, you may need to adjust the handling
-                // based on the actual type of the element.
-                // For example, you could check for other types like Button, Rectangle, etc.
             }
         }
 
@@ -124,8 +87,6 @@ namespace Pięciolinia
         //przycisk do dodawania taktów
         private void AddColumnButton_Click(object sender, RoutedEventArgs e)
         {
-            //AddColumnsToGrid(4); // 4 jak tempo to np 4/X
-
             // pobranie danych z textboxa
             string userInput = inputTextBox.Text;
             ProcessUserInput(userInput);
@@ -146,7 +107,7 @@ namespace Pięciolinia
                 {
                     if (columnCount <= 0)
                     {
-                        MessageBox.Show("Number of columns must be greater than zero.");
+                        MessageBox.Show("Ilość kolumn musi być większa niż 0.");
                         return;
                     }
 
@@ -155,18 +116,17 @@ namespace Pięciolinia
                     {
                         if (imageIndex <= 0)
                         {
-                            MessageBox.Show("Image index must be greater than zero.");
+                            MessageBox.Show("Indeks obrazu musi być większy niż 0.");
                             return;
                         }
 
                         // sprawdzenie czy nie wykracza poza ilość nut
                         if (imageIndex > 5)
                         {
-                            MessageBox.Show($"Nie ma tylu nut bruh.");
+                            MessageBox.Show($"Nie ma tylu nut.");
                             return;
                         }
 
-                        // jak wszystko buja, to zwraca zmienne
                         tactControl = true;
                         AddColumnsToGrid(columnCount, imageIndex - 1);
 
@@ -190,7 +150,7 @@ namespace Pięciolinia
             }
         }
 
-        // mięso dodawania taktu
+        // dodawanie taktu
         private void AddColumnsToGrid(int columnCount, int imageIndex)
         {
             for (int i = 0; i < columnCount; i++)
@@ -200,7 +160,7 @@ namespace Pięciolinia
 
                 // tworzenie elementu ze zdjęciem
                 Image newImage = new Image();
-                newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(sharedImagePaths[0], UriKind.RelativeOrAbsolute)); // Use the first image path as default
+                newImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(sharedImagePaths[0], UriKind.RelativeOrAbsolute));
                 Grid.SetColumn(newImage, mainGrid.ColumnDefinitions.Count - 1);
 
                 // tworzenie tego w określonym wierszu grida
@@ -232,7 +192,7 @@ namespace Pięciolinia
             }
 
 
-            // WEIRD STUFF - wybranie każdego elementu i przesunięcie go o 1 + i -, żeby zaktualizować typ nuty
+            // wybranie każdego elementu i przesunięcie go o 1 + i -, żeby zaktualizować typ nuty
             int x = 0;
             foreach (var ele in elementInfoList)
             {
@@ -263,26 +223,22 @@ namespace Pięciolinia
             {
                 if (elementInfo.Element is Image image)
                 {
-                    // Remove the effect by setting it to null
                     image.Effect = null;
                 }
             }
 
             ElementInfo selectedElementInfo = elementInfoList.Find(info => info.Element == selectedElement);
-            // Assuming selectedElementInfo is the selected element
             if (selectedElementInfo != null && selectedElementInfo.Element is Image selectedImage)
             {
-                // Create a DropShadowEffect
                 DropShadowEffect shadowEffect = new DropShadowEffect
                 {
                     ShadowDepth = 0.5,
                     BlurRadius = 15,
                     Color = Colors.DarkBlue,
                     Opacity = 1,
-                    Direction = 315 // Change the direction based on your preference
+                    Direction = 315
                 };
 
-                // Apply the effect to the selected Image
                 selectedImage.Effect = shadowEffect;
             }
         }
@@ -318,7 +274,6 @@ namespace Pięciolinia
 
                 int selectedElementRow = selectedElementInfo.UpDownValue;
                 char selectedElementType = selectedElementInfo.CurrentType;
-                //Console.WriteLine($"{selectedElementType}{selectedElementRow}");
             }
         }
 
@@ -389,7 +344,6 @@ namespace Pięciolinia
                 }
             }
 
-            //Console.WriteLine(data);
 
             //Zapisanie danych przy pomocy SaveFileDialog
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -435,9 +389,6 @@ namespace Pięciolinia
                     }
                 }
 
-                //Console.WriteLine(loadedTact);
-                //Console.WriteLine(loadedNotes);
-                //Console.WriteLine(numberOfNotes);
 
                 //Emuluje reczne dodanie taktu przez uzytkownika
                 inputTextBox.Text = loadedTact;
@@ -446,7 +397,6 @@ namespace Pięciolinia
                 //Zapamietac - co trzeci element loadedNotes to \n
 
                 string[] getTact = loadedTact.Split('/');
-                //Console.WriteLine(leftTact[0]);// <- ilosc nut na jeden takt
 
                 //Dodawanie kolejnych taktow jesli jest wiecej niz 1
                 int tempNoN = numberOfNotes;
@@ -471,10 +421,6 @@ namespace Pięciolinia
                 }
 
 
-
-                //Console.WriteLine(fullTacts); // <- ilosc pelnych taktow
-                //Console.WriteLine(forcedTacts); // <- ilosc wymuszonych taktow
-
                 //6 - startowa lokacja nuty
 
                 for (int i = 0; i < numberOfNotes; i++)
@@ -498,8 +444,6 @@ namespace Pięciolinia
                     }
 
                     int trueTact = Int32.Parse(getTact[1]);
-                    //Console.WriteLine($"{loadedNotes[4 * i]} {loadedNotes[4 * i + 1]} {getTact[1]}");
-                    //Console.WriteLine($"{tempNoteVal} {tempUpDown} {trueTact}");
 
                     //Zmiana typu nuty
                     while (tempNoteVal > trueTact)
@@ -542,8 +486,6 @@ namespace Pięciolinia
                 if (fullTacts != 0 & fullTacts < forcedTacts)
                 {
                     int forcedNumberOfNotes = forcedTacts * NotesOnTact;
-                    //Console.WriteLine(forcedNumberOfNotes);
-                    //Console.WriteLine(numberOfNotes);
 
                     int tempdel = forcedNumberOfNotes - numberOfNotes;
                     int tempdelnon = numberOfNotes;
@@ -568,7 +510,6 @@ namespace Pięciolinia
             {
                 if (elementInfo.Element is Image image)
                 {
-                    // Remove the effect by setting it to null
                     image.Effect = null;
                 }
             }
@@ -579,7 +520,6 @@ namespace Pięciolinia
         }
 
 
-        // mówi samo za siebie
         private class ElementInfo
         {
             public UIElement Element { get; set; }
@@ -725,31 +665,21 @@ namespace Pięciolinia
             {
                 int columnIndexToRemove = currentIndex;
 
-                // Remove elements associated with the column
                 foreach (var elementInfo in elementInfoList.ToArray())
                 {
                     if (Grid.GetColumn(elementInfo.Element) == columnIndexToRemove)
                     {
-                        // Remove any effects or highlights if applied
-                        // ...
-
-                        // Remove the element from the grid
                         mainGrid.Children.Remove(elementInfo.Element);
-
-                        // Remove the element from the list
                         elementInfoList.Remove(elementInfo);
                     }
                 }
 
-                // Remove the column definition
                 mainGrid.ColumnDefinitions.RemoveAt(columnIndexToRemove);
 
-                // Update column indices for remaining elements
                 foreach (var elementInfo in elementInfoList)
                 {
                     int currentColumn = Grid.GetColumn(elementInfo.Element);
 
-                    // Update the column index if it was after the removed column
                     if (currentColumn > columnIndexToRemove)
                     {
                         Grid.SetColumn(elementInfo.Element, currentColumn - 1);
@@ -783,7 +713,6 @@ namespace Pięciolinia
             if (!isPlaying)
             {
                 isPlaying = true;
-                //Console.WriteLine(elementInfoList.Count);
                 foreach (var note in elementInfoList)
                 {
                     if (isPlaying == false)
@@ -801,11 +730,9 @@ namespace Pięciolinia
                     
 
                     await Task.Delay(getDelayForNoteType(note.CurrentType));
-                    //System.Threading.Thread.Sleep(getDelayForNoteType(note.CurrentType));
 
                 }
                 isPlaying = false;
-                //Console.WriteLine(elementInfoList);
 
             }
         }
@@ -869,18 +796,6 @@ namespace Pięciolinia
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             var stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
-
-            //if (currentType > 13)
-            //{
-            //    stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n14.wav");
-            //}
-            //else
-            //{
-            //    stream = assembly.GetManifestResourceStream($"Pięciolinia.Resources.n{fileName}.wav");
-            //}
-
-
-
             
             using (SoundPlayer player = new SoundPlayer(stream))
             {
